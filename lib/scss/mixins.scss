@@ -1,0 +1,30 @@
+$VendorPrefixes: (
+  "-webkit-",
+  "-moz-",
+  "-o-",
+  "-ms-",
+  ""
+);
+
+@mixin vendors($propertyName, $propertyValue){
+  @for $i from 1 through length($VendorPrefixes) {
+    $vendor: nth($VendorPrefixes, $i);
+    
+    #{ $propertyName }: #{ $propertyValue };
+  }
+}
+
+@mixin css-keyframes($animationName){
+  @-webkit-keyframes #{$animationName} {
+      @content;
+  }
+  @-moz-keyframes #{$animationName} {
+      @content;
+  }
+  @-o-keyframes #{$animationName} {
+      @content;
+  }
+  @keyframes #{$animationName} {
+      @content;
+  }
+}
