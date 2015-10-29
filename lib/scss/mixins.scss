@@ -10,7 +10,7 @@ $VendorPrefixes: (
   @for $i from 1 through length($VendorPrefixes) {
     $vendor: nth($VendorPrefixes, $i);
     
-    #{ $propertyName }: #{ $propertyValue };
+    #{ $vendor }#{ $propertyName }: #{ $propertyValue };
   }
 }
 

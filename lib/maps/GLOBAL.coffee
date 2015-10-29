@@ -2,6 +2,9 @@ module.exports = (conf)->
   ob =
     cellSize:50
     mapSize:0
+    debug:false
+    members: {}
+    terrain: []
   
   for own k,v of conf
     ob[k] = v
