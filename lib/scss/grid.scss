@@ -7,10 +7,11 @@ body .plane-3d{
     .grid{
       width:50px;
       height:50px;
-      border:2px none rgba(0,0,0,0.25);
+      border:2px none rgba(0,0,0,1);
+      @include textureBuilder($dirt_color, $dirt_texture);
       
       &.grass{
-        background-color:$terra;
+        @include textureBuilder($grass_color, $grass_texture);
       }
     }
   }
@@ -20,8 +21,6 @@ body .plane-3d{
       .grid{
         border-top-style:solid;
         border-left-style:solid;
-        -webkit-box-shadow: inset 0px 0px 20px 0px rgba(0,0,0,0.05);
-        box-shadow: inset 0px 0px 20px 0px rgba(0,0,0,0.05);
         
         &.left{
           border-left-style:none;

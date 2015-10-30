@@ -9,6 +9,8 @@ module.exports = (conf)->
   for own k,v of conf
     ob[k] = v
   
+  ob.clock = Math.round(2000/30)
+  
   ob.world =
     el: document.querySelector('body > .plane-3d')
     dimension: ob.mapSize * ob.cellSize

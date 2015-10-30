@@ -1,7 +1,7 @@
 body{
   .plane-3d{    
     position:absolute;
-    background-color:$dirt;
+    @include textureBuilder($dirt_color, $dirt_texture);
     -webkit-box-shadow: inset 0px 0px 50px 0px rgba(0,0,0,0.5);
     box-shadow: inset 0px 0px 50px 0px rgba(0,0,0,0.5);
     transform-style: preserve-3d;
@@ -13,7 +13,7 @@ body{
     
     .terraFront, .terraSide{
       transform-style: preserve-3d;
-      background-color:$dirt;
+      @include textureBuilder($dirt_color, $dirt_texture);
       -webkit-box-shadow: inset 0px 0px 50px 0px rgba(0,0,0,0.5);
       box-shadow: inset 0px 0px 50px 0px rgba(0,0,0,0.5);
     }

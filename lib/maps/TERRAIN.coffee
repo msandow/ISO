@@ -1,2 +1,3 @@
 module.exports =
-  GRASS: 0
+  DIRT: 0
+  GRASS: 1

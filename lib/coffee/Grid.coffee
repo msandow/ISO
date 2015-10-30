@@ -20,6 +20,7 @@ module.exports = class extends Member
       c += ' left'
     
     c += switch MAPFILE.terrain[ Utils.XYtoIdx(@x, @y) ]
+      when Terrain.DIRT then ''
       when Terrain.GRASS then ' grass'
       else ''
     

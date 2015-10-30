@@ -28,3 +28,8 @@ $VendorPrefixes: (
       @content;
   }
 }
+
+@mixin textureBuilder($color, $image){
+  background:$color url( $image ) top left repeat;
+  background-size:128px 128px;
+}

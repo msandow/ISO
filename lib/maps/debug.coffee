@@ -1,7 +1,7 @@
 global = require('./GLOBAL.coffee')
 
 module.exports = global(
-  mapSize: 10
+  mapSize: 15
   debug: true
-  terrain: [null, null, 0]
+  terrain: Array.apply(null, Array(15*15)).map(->1)
 )
