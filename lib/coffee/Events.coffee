@@ -19,6 +19,9 @@ module.exports = ->
   )
   
   document.body.addEventListener('mousemove',(evt)->
+    evtX = evt.clientX / MAPFILE.scale
+    evtY = evt.clientY / MAPFILE.scale
+    
     GUTTER = 30
     SCROLL_COMMAND.x = 0
     SCROLL_COMMAND.y = 0
@@ -26,18 +29,18 @@ module.exports = ->
     scrollTop = window.pageYOffset
     bodyWidth = document.body.clientWidth
     bodyHeight = document.body.clientHeight
-    #console.log(evt.clientX)
-    if evt.clientX < GUTTER and scrollLeft
-      SCROLL_COMMAND.x = evt.clientX - GUTTER
+    #console.log(evtX)
+    if evtX < GUTTER and scrollLeft
+      SCROLL_COMMAND.x = evtX - GUTTER
 
-    if bodyWidth - evt.clientX < GUTTER and (MAPFILE.world.width > scrollLeft+bodyWidth)
-      SCROLL_COMMAND.x = GUTTER - (bodyWidth - evt.clientX)
+    if bodyWidth - evtX < GUTTER and (MAPFILE.world.width > scrollLeft+bodyWidth)
+      SCROLL_COMMAND.x = GUTTER - (bodyWidth - evtX)
 
-    if evt.clientY < GUTTER and scrollTop
-      SCROLL_COMMAND.y = evt.clientY - GUTTER
+    if evtY < GUTTER and scrollTop
+      SCROLL_COMMAND.y = evtY - GUTTER
 
-    if bodyHeight - evt.clientY < GUTTER and (MAPFILE.world.height > scrollTop+bodyHeight)
-      SCROLL_COMMAND.y = GUTTER - (bodyHeight - evt.clientY)
+    if bodyHeight - evtY < GUTTER and (MAPFILE.world.height > scrollTop+bodyHeight)
+      SCROLL_COMMAND.y = GUTTER - (bodyHeight - evtY)
     
     true
   )
