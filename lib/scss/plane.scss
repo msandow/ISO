@@ -5,7 +5,7 @@ body{
     -webkit-box-shadow: inset 0px 0px 50px 0px rgba(0,0,0,0.5);
     box-shadow: inset 0px 0px 50px 0px rgba(0,0,0,0.5);
     transform-style: preserve-3d;
-    transform: rotatex(53deg) rotateZ(45deg) translateZ(-50px);
+    //transform: rotatex(53deg) rotateZ(45deg) translateZ(-50px) scale(1,1);
     
     *{
       position:absolute;
@@ -14,8 +14,8 @@ body{
     .terraFront, .terraSide{
       transform-style: preserve-3d;
       @include textureBuilder($dirt_color, $dirt_texture);
-      -webkit-box-shadow: inset 0px 0px 50px 0px rgba(0,0,0,0.5);
-      box-shadow: inset 0px 0px 50px 0px rgba(0,0,0,0.5);
+      -webkit-box-shadow: inset 0px 0px 50px 0px rgba(0,0,0,1);
+      box-shadow: inset 0px 0px 50px 0px rgba(0,0,0,1);
     }
 
     .terraSide{

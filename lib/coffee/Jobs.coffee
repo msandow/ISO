@@ -6,7 +6,7 @@ jobs = []
     for job in jobs
       job()
     
-  ,MAPFILE.clock)
+  ,Math.round(1000 / (MAPFILE.clock * MAPFILE.clockMultiplier)))
 )
 
 module.exports =
