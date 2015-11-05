@@ -31,5 +31,100 @@ $VendorPrefixes: (
 
 @mixin textureBuilder($color, $image){
   background:$color url( $image ) top left repeat;
-  background-size:128px 128px;
+  background-size:50px 50px;
+  transform-style: preserve-3d;
+}
+
+@mixin cube($x, $y, $z, $moveUp: false, $subtle: false){
+  width:$x;
+  height:$y;
+  position:absolute;
+  background-color:$empty_3d_color;
+  -webkit-box-shadow: inset 0px 0px 50px 0px rgba(0,0,0,0.5);
+  box-shadow: inset 0px 0px 50px 0px rgba(0,0,0,0.5);
+  transform-style: preserve-3d;
+  
+  @if $moveUp == true{
+    transform: translateZ(50px);
+  }
+  
+  *{
+    position:absolute;
+  }
+  
+  > .front, > .side{
+    transform-style: preserve-3d;
+    
+    @if $subtle == true{
+      -webkit-box-shadow: inset 0px 0px 50px 0px rgba(0,0,0,0.5);
+      box-shadow: inset 0px 0px 50px 0px rgba(0,0,0,0.5);
+    }
+    @else{
+      -webkit-box-shadow: inset 0px 0px 50px 0px rgba(0,0,0,1);
+      box-shadow: inset 0px 0px 50px 0px rgba(0,0,0,1);
+    }
+  }
+  
+  > .side{
+    background-color:lighten($empty_3d_color,10%);
+    left:100%;
+    top:0%;
+    height:100%;
+    width:$z;
+    @include transformObject((
+      rotateY: 90deg,
+      translateX: $z/2,
+      translateZ: 0-($z/2)
+    ));
+  }
+
+  > .front{
+    background-color:darken($empty_3d_color,10%);
+    left:0%;
+    top:100%;
+    width:100%;
+    height:$z;
+    @include transformObject((
+      rotateX: 90deg,
+      rotateZ: 180deg,
+      translateY: $z/2,
+      translateZ: $z/2
+    ));
+
+  }
+}
+
+@mixin transformObject($ob: ()){
+  $default: (
+    translateZ: 0px,
+    translateX: 0px,
+    translateY: 0px,
+    rotateX: 0deg,
+    rotateY: 0deg,
+    rotateZ: 0deg,
+    scale: 1
+  );
+  
+  $merge: map-merge($default, $ob);
+  
+  @if map-get($merge, scale) != 1{
+    transform: rotateX(map-get($merge, rotateX)) rotateY(map-get($merge, rotateY)) rotateZ(map-get($merge, rotateZ)) translateX(map-get($merge, translateX)) translateY(map-get($merge, translateY)) translateZ(map-get($merge, translateZ)) scale3d(map-get($merge, scale),map-get($merge, scale),map-get($merge, scale));
+  }
+  @else{
+    transform: rotateX(map-get($merge, rotateX)) rotateY(map-get($merge, rotateY)) rotateZ(map-get($merge, rotateZ)) translateX(map-get($merge, translateX)) translateY(map-get($merge, translateY)) translateZ(map-get($merge, translateZ));
+  }
+}
+
+@mixin spriteTransform($ob: ()){
+  $default: (
+    rotateX: -45deg,
+    rotateY: 45deg,
+    rotateZ: -28.8deg,
+    translateZ: 25px,
+    translateY: -12px
+  );
+  
+  $merge: map-merge($default, $ob);
+  
+  @include transformObject($merge);
 }

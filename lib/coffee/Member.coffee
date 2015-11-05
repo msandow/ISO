@@ -1,21 +1,25 @@
+Utils = require('./Utils.coffee')
+
+
 module.exports = class
   constructor: ->
-    @width = 0
-    @height = 0
-    @x = 0
-    @y = 0
+    @width = 0 if @width is undefined
+    @height = 0 if @height is undefined
+    @x = 1 if @x is undefined
+    @y = 1 if @y is undefined
     @type = "" if @type is undefined
-    @data = {}
+    @data = {} if @data is undefined
+    @structure = '<div></div>' if @structure is undefined
     
     @
   
   spawn: ->
-    @el = document.createElement('div')
+    @el = Utils.stringToDOM(@structure)
     @el._clz = @
-    @el.className = @classNameGenerator()
     
-    MAPFILE.members[ @type ] = [] if MAPFILE.members[ @type ] is undefined
-    MAPFILE.members[ @type ].push(@)
+    for type in @type.split('-')
+      MAPFILE.members[ type ] = [] if MAPFILE.members[ type ] is undefined
+      MAPFILE.members[ type ].push(@)
     
     @
 
@@ -23,7 +27,8 @@ module.exports = class
     ""
 
 
-  reposition: ->
+  restyle: ->
+    @el.className = @classNameGenerator()
     @el.style.left = (MAPFILE.cellSize * (@x-1)) + 'px'
     @el.style.top = (MAPFILE.cellSize * (@y-1)) + 'px'
     

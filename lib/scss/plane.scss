@@ -1,38 +1,11 @@
 body{
-  .plane-3d{    
-    position:absolute;
+  .plane-3d{
+    @include cube(auto,auto,50px);
     @include textureBuilder($dirt_color, $dirt_texture);
-    -webkit-box-shadow: inset 0px 0px 50px 0px rgba(0,0,0,0.5);
-    box-shadow: inset 0px 0px 50px 0px rgba(0,0,0,0.5);
-    transform-style: preserve-3d;
-    //transform: rotatex(53deg) rotateZ(45deg) translateZ(-50px) scale(1,1);
     
-    *{
-      position:absolute;
-    }
-    
-    .terraFront, .terraSide{
-      transform-style: preserve-3d;
+
+    > .front, > .side{
       @include textureBuilder($dirt_color, $dirt_texture);
-      -webkit-box-shadow: inset 0px 0px 50px 0px rgba(0,0,0,1);
-      box-shadow: inset 0px 0px 50px 0px rgba(0,0,0,1);
     }
-
-    .terraSide{
-      left:100%;
-      top:0%;
-      height:100%;
-      width:50px;
-      transform: rotateY(90deg) translateX(25px) translateZ(-25px);
-    }
-
-    .terraFront{
-      left:0%;
-      top:100%;
-      width:100%;
-      height:50px;
-      transform: rotateX(90deg) rotateZ(180deg) translateY(25px) translateZ(25px);
-    }
-    
   }
 }

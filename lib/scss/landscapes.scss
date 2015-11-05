@@ -1,0 +1,32 @@
+body .plane-3d{
+  .landscape{
+    position:absolute;
+    transform: translateZ(1px);
+    background-size:100% 100%;
+    width:50px;
+    height:50px;
+    @include spriteTransform();
+    
+    &.bush{
+      width:25px;
+      height:25px;
+      background-image:url($woods_texture_1);
+      @include spriteTransform((
+        translateY: 7px,
+        translateZ: 33px,
+        translateX: -4px
+      ));
+    }
+    
+    &.tree{
+      width:32.6px;
+      height:50px;
+      background-image:url($woods_texture_2);
+      @include spriteTransform((
+        translateY: -14px,
+        translateZ: 23px,
+        translateX: 1px
+      ));
+    }
+  }
+}

@@ -1,57 +1,58 @@
 Grid = require('./Grid.coffee')
+Utils = require('./Utils.coffee')
 
 
-applyWorldValues = (map)->
-  map.world.width = Math.floor(70.7106*map.mapSize)
-  map.world.height = Math.floor(42.5496*map.mapSize)
-  map.world.offsetLeft = Math.round((10.3432*map.mapSize + 0.451074) + (706.971*map.scale - 706.771))
-  map.world.offsetTop = Math.round((-3.72692*map.mapSize - 38.6154) + (422.971*map.scale - 422.771))
-
-
-setUpWorldSpace = (map)->
+applyWorldValues = ()->
+  MAPFILE.world.width = Math.floor(70.7106*MAPFILE.mapSize)
+  MAPFILE.world.height = Math.floor(42.5496*MAPFILE.mapSize)
+  MAPFILE.world.offsetLeft = Math.round((10.3432*MAPFILE.mapSize + 0.451074) + (706.971*MAPFILE.scale - 706.771))
+  MAPFILE.world.offsetTop = Math.round((-3.72692*MAPFILE.mapSize - 38.6154) + (422.971*MAPFILE.scale - 422.771))
   
-  map.world.el.style.width = "#{map.world.dimension}px"
-  map.world.el.style.height = "#{map.world.dimension}px"
-  map.world.el.style.top = "#{map.world.offsetTop}px"
-  map.world.el.style.left = "#{map.world.offsetLeft}px"
-  map.world.el.style.transform = "rotateX(53deg) rotateZ(45deg) translateZ(-50px) scale(#{map.scale},#{map.scale})"
   
-  map
+
+setUpWorldSpace = ()->
+  Utils.styleElement(MAPFILE.world.el,{
+    width: MAPFILE.world.dimension + 'px'
+    height: MAPFILE.world.dimension + 'px'
+    top: MAPFILE.world.offsetTop + 'px'
+    left: MAPFILE.world.offsetLeft + 'px'
+    transform: "rotateX(53deg) rotateZ(45deg) translateZ(-50px) scale3d(#{MAPFILE.scale},#{MAPFILE.scale},#{MAPFILE.scale})"
+  })
 
 
-setUpWorldGrid = (map)->
+setUpWorldGrid = ()->
   
-  if map.debug
-    map.world.el.className = map.world.el.className + " withGrid"
+  if MAPFILE.debug
+    MAPFILE.world.el.className = MAPFILE.world.el.className + " withGrid"
   
   el = document.createElement('div')
   el.className = 'grid-3d'
 
-  map.world.el.appendChild(el)
+  MAPFILE.world.el.appendChild(el)
 
   y = 1
   e = null
-  while y <= map.mapSize    
+  while y <= MAPFILE.mapSize    
     x = 1
-    while x <= map.mapSize
+    while x <= MAPFILE.mapSize
       e = new Grid(x,y)
-      e.spawn().reposition()
+      e.spawn().restyle()
       el.appendChild(e.el)      
       x++
     y++
 
 
-
 module.exports =
   
   setUp: ->
-    applyWorldValues(MAPFILE)
-    setUpWorldSpace(MAPFILE)
+    applyWorldValues()
+    setUpWorldSpace()
     window.scrollTo(Math.floor(MAPFILE.world.width/2) - Math.floor(document.body.clientWidth/2), 0)
-    setUpWorldGrid(MAPFILE)
+    setUpWorldGrid()
+    MAPFILE.importMembers()
 
     true
   
   update: ->
-    applyWorldValues(MAPFILE)
-    setUpWorldSpace(MAPFILE)
+    applyWorldValues()
+    setUpWorldSpace()
