@@ -9,27 +9,75 @@ body .plane-3d{
       width:50px;
       height:50px;
       border:2px none rgba(0,0,0,0.25);
+      overflow:hidden;
       @include textureBuilder($dirt_color, $dirt_texture);
       
       > div{
         display:none;
         transform-style: preserve-3d;
+        
+        &:after{
+          position:absolute;
+          display:none;
+          background-clip: padding-box;
+        }
       }
       
-      &.grass_1{
+      &.grass_1,
+      &.sub-grass_1 > div,
+      &.grass_1 > div:after{
         @include textureBuilder($grass_color, '');
       }
       
-      &.grass_2{
+      &.grass_2,
+      &.sub-grass_2 > div,
+      &.grass_2 > div:after{
         @include textureBuilder($grass_color, $grass_texture_1);
       }
       
-      &.grass_3{
+      &.grass_3,
+      &.sub-grass_3 > div,
+      &.grass_3 > div:after{
         @include textureBuilder($grass_color, $grass_texture_2);
       }
       
-      &.woods_1{
+      &.woods_1,
+      &.sub-woods_1 > div,
+      &.woods_1 > div:after{
         @include textureBuilder($woods_color, '');
+      }
+      
+      
+      &.corner-topleft > div,
+      &.corner-topright > div,
+      &.corner-bottomleft > div,
+      &.corner-bottomright > div{
+        width:100%;
+        height:100%;
+        display:block;
+        
+        &:after{
+          content:"";
+          display:block;
+          width:100%;
+          height:100%;          
+        }
+      }
+      
+      &.corner-topleft > div:after{
+        border-top-left-radius:50%;
+      }
+      
+      &.corner-bottomleft > div:after{
+        border-bottom-left-radius:50%;
+      }
+
+      &.corner-bottomright > div:after{
+        border-bottom-right-radius:50%;
+      }
+
+      &.corner-topright > div:after{
+        border-top-right-radius:50%;
       }
     }
   }

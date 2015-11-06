@@ -36,4 +36,21 @@ module.exports =
       
       rand -= item.weight
 
-    #console.log(weightSum)
+
+  arrayOccuranceCount: (arr)->
+    o = {}
+    
+    for item in arr when ['number','string'].indexOf(typeof item) > -1
+      if o[item] is undefined
+        o[item] = 1
+      else
+        o[item]++
+    
+    highest = 0
+    point = undefined
+
+    for own k, c of o when c > highest
+      highest = c
+      point = k
+    
+    return if /[\D]/.test(point) then point else parseInt(point)

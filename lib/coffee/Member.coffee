@@ -33,3 +33,54 @@ module.exports = class
     @el.style.top = (MAPFILE.cellSize * (@y-1)) + 'px'
     
     @
+
+
+  getAdjacentPositions: (asGrids = true)->
+    adj = []
+
+    #tops
+    i = 0
+    ref =
+      x: @x
+      y: @y
+    while i < @width
+      if (ref.y-1) >= 1
+        adj.push([ ref.x+i, ref.y-1 ])
+      i++
+
+    #rights
+    i = 0
+    ref =
+      x: @x + @width-1
+      y: @y
+    while i < @height
+      if (ref.x+1) <= MAPFILE.mapSize
+        adj.push([ ref.x+1, ref.y+i ])        
+      i++
+
+    #bottoms
+    i = 0
+    ref =
+      x: @x
+      y: @y + @height-1
+    while i < @width
+      if (ref.y+1) <= MAPFILE.mapSize
+        adj.push([ ref.x+i, ref.y+1 ])
+      i++
+
+    #left
+    i = 0
+    ref =
+      x: @x
+      y: @y
+    while i < @height
+      if (ref.x-1) >= 1
+        adj.push([ ref.x-1, ref.y+i ])        
+      i++
+
+    adj.map((i)->
+      if asGrids
+        return MAPFILE.members.grid[ Utils.XYtoIdx(i[0], i[1]) ]
+      
+      return Utils.XYtoIdx(i[0], i[1])
+    )
