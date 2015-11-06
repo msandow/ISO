@@ -4,7 +4,7 @@ Terrain = require('./../maps/TERRAIN.coffee')
 
 terrainIdToClass = (id)->
   switch id
-    when Terrain.DIRT then ''
+    when Terrain.DIRT then ' dirt_1'
     when Terrain.GRASS
       Utils.weightedRandom([
         {

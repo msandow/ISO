@@ -71,5 +71,7 @@ module.exports = class
   importMembers: ()->
     for imp in @imports
       imp.spawn().restyle()
-      @world.el.appendChild(imp.el)      
-      @members.grid[ Utils.XYtoIdx(imp.x, imp.y) ].data.children.push(imp)
+      @world.el.appendChild(imp.el)
+      grid = @members.grid[ Utils.XYtoIdx(imp.x, imp.y) ]
+      grid.data.children.push(imp)
+      imp.parent = grid
