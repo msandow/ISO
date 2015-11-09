@@ -1,4 +1,5 @@
 Landscape = require('./../Landscape.coffee')
+Utils = require('./../Utils.coffee')
 
 module.exports = class extends Landscape
   constructor: (@x,@y)->
@@ -6,4 +7,13 @@ module.exports = class extends Landscape
     super(@x,@y)
   
   classNameGenerator: ->
-    "landscape tree"
+    Utils.weightedRandom([
+      {
+        value: 'landscape tree'
+        weight: 25
+      }
+      {
+        value: 'landscape tree tall'
+        weight: 20
+      }
+    ])

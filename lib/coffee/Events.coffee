@@ -87,7 +87,7 @@ module.exports = ->
   
   document.body.addEventListener('mouseout',SCROLL_RESET)
   
-  document.addEventListener('mousemove', SCROLL_DETECTION)
+  #document.addEventListener('mousemove', SCROLL_DETECTION)
   
   document.addEventListener('mousewheel', ZOOM_DETECTION)
   

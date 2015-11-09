@@ -1,7 +1,6 @@
 body .plane-3d{
   .building{
     @include cube(50px,50px,50px,true,true);
-    opacity:0.75;
 
 
     &.test-building{

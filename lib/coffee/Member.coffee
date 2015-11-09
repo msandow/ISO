@@ -32,6 +32,9 @@ module.exports = class
     @el.style.left = (MAPFILE.cellSize * (@x-1)) + 'px'
     @el.style.top = (MAPFILE.cellSize * (@y-1)) + 'px'
     
+    if @type isnt 'grid'
+      @el.style.zIndex = Utils.XYtoIdx(@x,  @y)
+    
     @
 
 
