@@ -1,5 +1,6 @@
 $bushPerspective: (237/171);
 $treePerspective: (184/235);
+$grassPerspective: (194/188);
 
 body .plane-3d{
   .landscape{
@@ -19,6 +20,26 @@ body .plane-3d{
         translateZ: 35px,
         translateX: -3px
       ));
+    }
+    
+    &.grass{
+      width:20px;
+      opacity:0.75;
+      height:20px/$grassPerspective;
+      background-image:url($grass_sprite);
+      @include spriteTransform((
+        translateY: 0px,
+        translateZ: 23px,
+        translateX: 7px
+      ));
+      
+      &.shift{
+        @include spriteTransform((
+          translateY: 6px,
+          translateZ: 30px,
+          translateX: -13px
+        ));
+      }
     }
     
     &.tree{

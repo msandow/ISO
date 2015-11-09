@@ -3,8 +3,8 @@ Utils = require('./Utils.coffee')
 
 module.exports = class
   constructor: ->
-    @width = 0 if @width is undefined
-    @height = 0 if @height is undefined
+    @width = 1 if @width is undefined
+    @height = 1 if @height is undefined
     @x = 1 if @x is undefined
     @y = 1 if @y is undefined
     @type = "" if @type is undefined

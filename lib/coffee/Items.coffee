@@ -4,3 +4,4 @@ module.exports =
   landscape:
     bush: require('./../coffee/landscapes/bush.coffee')
     tree: require('./../coffee/landscapes/tree.coffee')
+    grass: require('./../coffee/landscapes/grass.coffee')

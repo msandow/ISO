@@ -1,5 +1,6 @@
 Grid = require('./Grid.coffee')
 Utils = require('./Utils.coffee')
+Items = require('./Items.coffee')
 
 
 applyWorldValues = ()->
@@ -50,9 +51,23 @@ module.exports =
     window.scrollTo(Math.floor(MAPFILE.world.width/2) - Math.floor(document.body.clientWidth/2), 0)
     setUpWorldGrid()
     MAPFILE.importMembers()
+    @sprinkle()
 
     true
-  
+
+
   update: ->
     applyWorldValues()
     setUpWorldSpace()
+
+  
+  sprinkle: ()->
+    addGrass = (grid)->
+      grass = new Items.landscape.grass(grid.x, grid.y).spawn().restyle()
+      MAPFILE.world.el.appendChild(grass.el)
+  
+    for grid in MAPFILE.members.grid
+      if grid.terrainId is 1 and /grass_[1-2]/.test(grid.el.className) and 0.25 < Math.random() < 0.75
+        addGrass(grid)
+      else if grid.terrainId is 2 and 0.1 < Math.random() < 0.9
+        addGrass(grid)
