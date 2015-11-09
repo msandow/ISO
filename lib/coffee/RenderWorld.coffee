@@ -8,8 +8,15 @@ applyWorldValues = ()->
   MAPFILE.world.height = Math.floor(42.5496*MAPFILE.mapSize)
   MAPFILE.world.offsetLeft = Math.round((10.3432*MAPFILE.mapSize + 0.451074) + (706.971*MAPFILE.scale - 706.771))
   MAPFILE.world.offsetTop = Math.round((-3.72692*MAPFILE.mapSize - 38.6154) + (422.971*MAPFILE.scale - 422.771))
-  
-  
+
+  for ter, idx in MAPFILE.terrain when [1,2].indexOf(ter) > -1
+    if ter is 1 and 0.35 < Math.random() < 0.65
+      c = Utils.IdxToXY(idx)
+      MAPFILE.imports.push( new Items.landscape.grass(c.x, c.y) )
+    if ter is 2 and 0.1 < Math.random() < 0.9
+      c = Utils.IdxToXY(idx)
+      MAPFILE.imports.push( new Items.landscape.grass(c.x, c.y) )
+
 
 setUpWorldSpace = ()->
   Utils.styleElement(MAPFILE.world.el,{
@@ -51,7 +58,7 @@ module.exports =
     window.scrollTo(Math.floor(MAPFILE.world.width/2) - Math.floor(document.body.clientWidth/2), 0)
     setUpWorldGrid()
     MAPFILE.importMembers()
-    @sprinkle()
+    #@sprinkle()
 
     true
 

@@ -6,6 +6,12 @@ module.exports =
     (y*MAPFILE.mapSize) + x
 
 
+  IdxToXY: (idx)->
+    y = Math.floor(idx/MAPFILE.mapSize)+1
+    x = (idx - ((y-1)*MAPFILE.mapSize)) + 1
+    {x: x, y: y}
+
+
   styleElement: (el, styles)->
     for own prop, value of styles
       el.style[prop] = value

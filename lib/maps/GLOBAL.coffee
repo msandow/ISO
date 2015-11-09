@@ -12,7 +12,7 @@ module.exports = class
     @clock = 30
     @clockMultiplier = 1
     @scale = 1
-    @imports = null
+    @imports = []
     
     for own k,v of conf
       @[k] = v
