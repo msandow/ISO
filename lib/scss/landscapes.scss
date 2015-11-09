@@ -1,3 +1,6 @@
+$bushPerspective: (237/171);
+$treePerspective: (184/235);
+
 body .plane-3d{
   .landscape{
     position:absolute;
@@ -8,10 +11,9 @@ body .plane-3d{
     @include spriteTransform();
     
     &.bush{
-      $perspective: (171/235);
       width:25px;
-      height:25px*$perspective;
-      background-image:url($woods_texture_1);
+      height:25px/$bushPerspective;
+      background-image:url($bush_sprite);
       @include spriteTransform((
         translateY: 10px,
         translateZ: 35px,
@@ -20,10 +22,9 @@ body .plane-3d{
     }
     
     &.tree{
-      $perspective: (184/235);
       width:33px;
-      height:33px/$perspective;
-      background-image:url($woods_texture_2);
+      height:33px/$treePerspective;
+      background-image:url($tree_sprite);
       @include spriteTransform((
         translateY: -14px,
         translateZ: 23px,
@@ -31,13 +32,28 @@ body .plane-3d{
       ));
       
       &.tall{
-        $perspective: (184/235);
         width:43px;
-        height:43px/$perspective;
+        height:43px/$treePerspective;
         @include spriteTransform((
           translateY: -26px,
           translateZ: 27px,
           translateX: 1px
+        ));
+      }
+      
+      &.dual{
+        width:55px;
+        height:55px/$treePerspective;
+        
+        background-image:url($tree_sprite), url($tree_sprite);
+        background-size:75% 75%, 60% 60%;
+        background-position:100% 100%, -10% 70%;
+        background-repeat:no-repeat, no-repeat;
+        
+        @include spriteTransform((
+          translateY: -34px,
+          translateZ: 27px,
+          translateX: 8px
         ));
       }
     }

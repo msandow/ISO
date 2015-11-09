@@ -22,8 +22,8 @@ setUpWorldSpace = ()->
 
 setUpWorldGrid = ()->
   
-  if MAPFILE.debug
-    MAPFILE.world.el.className = MAPFILE.world.el.className + " withGrid"
+  #if MAPFILE.debug
+  #  MAPFILE.world.el.className = MAPFILE.world.el.className + " withGrid"
   
   el = document.createElement('div')
   el.className = 'grid-3d'

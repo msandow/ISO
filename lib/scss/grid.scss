@@ -10,7 +10,7 @@ body .plane-3d{
       height:50px;
       border:2px none rgba(0,0,0,0.25);
       overflow:hidden;
-      @include textureBuilder($dirt_color, $dirt_texture);
+      @include textureBuilder($dirt_color, $rocky_texture_1);
       
       > div{
         display:none;
@@ -26,31 +26,31 @@ body .plane-3d{
       &.dirt_1,
       &.sub-dirt_1 > div,
       &.dirt_1 > div:after{
-        @include textureBuilder($dirt_color, $dirt_texture);
+        @include textureBuilder($dirt_color, $rocky_texture_1);
       }
       
       &.grass_1,
       &.sub-grass_1 > div,
       &.grass_1 > div:after{
-        @include textureBuilder($grass_color, $grass_texture_1);
+        @include textureBuilder($grass_color, $leafy_texture_1);
       }
       
       &.grass_2,
       &.sub-grass_2 > div,
       &.grass_2 > div:after{
-        @include textureBuilder($grass_color, $grass_texture_2);
+        @include textureBuilder($grass_darker_color, $leafy_texture_1);
       }
       
       &.grass_3,
       &.sub-grass_3 > div,
       &.grass_3 > div:after{
-        @include textureBuilder($grass_color, $grass_texture_3);
+        @include textureBuilder($grass_yellow_color, $leafy_texture_1);
       }
       
       &.woods_1,
       &.sub-woods_1 > div,
       &.woods_1 > div:after{
-        @include textureBuilder($woods_color, $woods_texture_3);
+        @include textureBuilder($woods_color, $leafy_texture_2);
       }
       
       

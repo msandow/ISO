@@ -48,38 +48,39 @@ module.exports = class extends Member
     c += terrainIdToClass(@terrainId)
     
     # Create terrain transition tiles
-    
-    adj = @getAdjacentPositions(false).filter((i)=>
-      MAPFILE.terrain[i] isnt @terrainId
-    )
-    
-    if adj.length > 1
-      toPair = Utils.arrayOccuranceCount(adj.map((i)->
-        MAPFILE.terrain[i]
-      ))
+    return c
+    if @terrainId isnt 1
+      adj = @getAdjacentPositions(false).filter((i)=>
+        MAPFILE.terrain[i] isnt @terrainId
+      )
 
-      p = {
-        top: false
-        right: false
-        bottom: false
-        left: false
-      }
+      if adj.length > 1
+        toPair = Utils.arrayOccuranceCount(adj.map((i)->
+          MAPFILE.terrain[i]
+        ))
 
-      for idx in adj
-        if idx is @idx-1
-          p.left = true
-        else if idx is @idx+1
-          p.right = true
-        else if idx < @idx
-          p.top = true
-        else
-          p.bottom = true
-      
-      c += ' corner-topleft' if p.top and p.left
-      c += ' corner-topright' if p.top and p.right
-      c += ' corner-bottomleft' if p.bottom and p.left
-      c += ' corner-bottomright' if p.bottom and p.right
+        p = {
+          top: false
+          right: false
+          bottom: false
+          left: false
+        }
 
-      c += ' sub-' + terrainIdToClass(toPair).trim()
+        for idx in adj
+          if idx is @idx-1
+            p.left = true
+          else if idx is @idx+1
+            p.right = true
+          else if idx < @idx
+            p.top = true
+          else
+            p.bottom = true
+
+        c += ' corner-topleft' if p.top and p.left
+        c += ' corner-topright' if p.top and p.right
+        c += ' corner-bottomleft' if p.bottom and p.left
+        c += ' corner-bottomright' if p.bottom and p.right
+
+        c += ' sub-' + terrainIdToClass(toPair).trim()
     
     c

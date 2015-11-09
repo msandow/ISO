@@ -14,7 +14,7 @@ module.exports = new global(
     a[165] = TERRAIN.WOODS
     a[166] = TERRAIN.WOODS
     a[167] = TERRAIN.WOODS
-    #a[168] = TERRAIN.DIRT
+    a[168] = TERRAIN.DIRT
     a
   imports: do ->
     a = []

@@ -16,4 +16,8 @@ module.exports = class extends Landscape
         value: 'landscape tree tall'
         weight: 20
       }
+      {
+        value: 'landscape tree dual'
+        weight: 20
+      }
     ])
