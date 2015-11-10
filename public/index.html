@@ -9,6 +9,47 @@
     <script type="text/javascript" src="app.js"> </script>
   </head>
   <body>
+    <svg>
+      <defs>
+        <clippath id="all_corners" clipPathUnits="objectBoundingBox">
+          <polygon points=".5 0, .8 .1, 1 .35, 1 .7, .8 .9, .5 1, .2 .9, 0 .7, 0 .35, .2 .1"></polygon>
+        </clippath>
+        
+        <clippath id="right_corners" clipPathUnits="objectBoundingBox">
+          <polygon points=".5 0, .8 .1, 1 .35, 1 .7, .8 .9, .5 1, 0 1, 0 0"></polygon>
+        </clippath>
+        
+        <clippath id="top_corners" clipPathUnits="objectBoundingBox">
+          <polygon points=".5 0, .8 .1, 1 .35, 1 .7, 1 1, 0 1, 0 .7, 0 .35, .2 .1"></polygon>
+        </clippath>
+        
+        <clippath id="left_corners" clipPathUnits="objectBoundingBox">
+          <polygon points=".5 0, 1 0, 1 1,.5 1, .2 .9, 0 .7, 0 .35, .2 .1"></polygon>
+        </clippath>
+        
+        <clippath id="bottom_corners" clipPathUnits="objectBoundingBox">
+          <polygon points="0 0, 1 0, 1 .7, .8 .9, .5 1, .2 .9, 0 .7, 0 .35"></polygon>
+        </clippath>
+        
+        <clippath id="bottom_right_corner" clipPathUnits="objectBoundingBox">
+          <polygon points="0 0, 1 0, 1 .35, 1 .7, .8 .9, .5 1, 0 1"></polygon>
+        </clippath>
+        
+        <clippath id="bottom_left_corner" clipPathUnits="objectBoundingBox">
+          <polygon points="0 0, 1 0, 1 1, .5 1, .2 .9, 0 .7, 0 0"></polygon>
+        </clippath>
+        
+        <clippath id="top_left_corner" clipPathUnits="objectBoundingBox">
+          <polygon points=".5 0, 1 0, 1 1, 0 1, 0 .7, 0 .35, .2 .1"></polygon>
+        </clippath>
+        
+        <clippath id="top_right_corner" clipPathUnits="objectBoundingBox">
+          <polygon points=".5 0, .8 .1, 1 .35, 1 1, 0 1, 0 0"></polygon>
+        </clippath>
+      </defs>
+    </svg>
+
+    
     <div class="twinkle"></div>
     
     <div class="plane-3d">

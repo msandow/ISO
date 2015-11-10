@@ -24,7 +24,6 @@ body .plane-3d{
     
     &.grass{
       width:20px;
-      opacity:0.75;
       height:20px/$grassPerspective;
       background-image:url($grass_sprite);
       @include spriteTransform((

@@ -70,20 +70,49 @@ body .plane-3d{
         }
       }
       
-      &.corner-topleft > div:after{
-        border-top-left-radius:50%;
+      &.corner-topleft.corner-topright.corner-bottomleft.corner-bottomright > div:after{
+        -webkit-clip-path: url(#all_corners);
+        clip-path: url(/#all_corners);
+      }
+      
+      &.corner-bottomleft.corner-bottomright > div:after{
+        -webkit-clip-path: url(#bottom_corners);
+        clip-path: url(/#bottom_corners);
+      }
+      
+      &.corner-topright.corner-bottomright > div:after{
+        -webkit-clip-path: url(#right_corners);
+        clip-path: url(/#right_corners);
+      }
+      
+      &.corner-topleft.corner-bottomleft > div:after{
+        -webkit-clip-path: url(#left_corners);
+        clip-path: url(/#left_corners);
+      }
+      
+      &.corner-topleft.corner-topright > div:after{
+        -webkit-clip-path: url(#top_corners);
+        clip-path: url(/#top_corners);
+      }
+      
+      &.corner-bottomright > div:after{
+        -webkit-clip-path: url(#bottom_right_corner);
+        clip-path: url(/#bottom_right_corner);
       }
       
       &.corner-bottomleft > div:after{
-        border-bottom-left-radius:50%;
+        -webkit-clip-path: url(#bottom_left_corner);
+        clip-path: url(/#bottom_left_corner);
       }
-
-      &.corner-bottomright > div:after{
-        border-bottom-right-radius:50%;
+      
+      &.corner-topleft > div:after{
+        -webkit-clip-path: url(#top_left_corner);
+        clip-path: url(/#top_left_corner);
       }
-
-      &.corner-topright > div:after{
-        border-top-right-radius:50%;
+      
+       &.corner-topright > div:after{
+        -webkit-clip-path: url(#top_right_corner);
+        clip-path: url(/#top_right_corner);
       }
     }
   }

@@ -1,11 +1,11 @@
 body{
   .plane-3d{
     @include cube(auto,auto,50px);
-    @include textureBuilder($dirt_color, $dirt_texture);
+    @include textureBuilder($dirt_color, $rocky_texture_1);
     
 
     > .front, > .side{
-      @include textureBuilder($dirt_color, $dirt_texture);
+      @include textureBuilder($dirt_color, $rocky_texture_1);
     }
   }
 }
