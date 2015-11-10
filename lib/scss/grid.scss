@@ -71,8 +71,7 @@ body .plane-3d{
       }
       
       &.corner-topleft.corner-topright.corner-bottomleft.corner-bottomright > div:after{
-        -webkit-clip-path: url(#all_corners);
-        clip-path: url(/#all_corners);
+        @include clipPath(all_corners);
       }
       
       &.corner-bottomleft.corner-bottomright > div:after{

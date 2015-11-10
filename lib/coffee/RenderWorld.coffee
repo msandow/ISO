@@ -19,6 +19,7 @@ applyWorldValues = ()->
 
 
 setUpWorldSpace = ()->
+  
   Utils.styleElement(MAPFILE.world.el,{
     width: MAPFILE.world.dimension + 'px'
     height: MAPFILE.world.dimension + 'px'
@@ -53,6 +54,7 @@ setUpWorldGrid = ()->
 module.exports =
   
   setUp: ->
+    require('./SVG.coffee')()
     applyWorldValues()
     setUpWorldSpace()
     window.scrollTo(Math.floor(MAPFILE.world.width/2) - Math.floor(document.body.clientWidth/2), 0)

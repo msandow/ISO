@@ -128,3 +128,8 @@ $VendorPrefixes: (
   
   @include transformObject($merge);
 }
+
+@mixin clipPath($path: ''){
+   -webkit-clip-path: url(##{$path});
+    clip-path: url(/##{$path});
+}
