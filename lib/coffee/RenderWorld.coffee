@@ -27,12 +27,17 @@ setUpWorldSpace = ()->
     left: MAPFILE.world.offsetLeft + 'px'
     transform: "rotateX(53deg) rotateZ(45deg) translateZ(-50px) scale3d(#{MAPFILE.scale},#{MAPFILE.scale},#{MAPFILE.scale})"
   })
+  
+  Utils.styleElement(document.body,{
+    width: MAPFILE.world.width + 'px'
+    height: MAPFILE.world.height + 'px'
+  });
 
 
 setUpWorldGrid = ()->
   
-  #if MAPFILE.debug
-  #  MAPFILE.world.el.className = MAPFILE.world.el.className + " withGrid"
+  if MAPFILE.debug
+    document.body.className = if document.body.className then document.body.className + " withGrid" else "withGrid"
   
   el = document.createElement('div')
   el.className = 'grid-3d'
@@ -51,6 +56,12 @@ setUpWorldGrid = ()->
     y++
 
 
+setUpControlPanel = ->
+
+  document.body.className = document.body.className + " withPanel"
+  MAPFILE.panel.el.style.top = document.documentElement.clientHeight + 'px'
+
+
 module.exports =
   
   setUp: ->
@@ -59,6 +70,7 @@ module.exports =
     setUpWorldSpace()
     window.scrollTo(Math.floor(MAPFILE.world.width/2) - Math.floor(document.body.clientWidth/2), 0)
     setUpWorldGrid()
+    setUpControlPanel()
     MAPFILE.importMembers()
 
     true

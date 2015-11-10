@@ -60,3 +60,8 @@ module.exports =
       point = k
     
     return if /[\D]/.test(point) then point else parseInt(point)
+
+
+  matches: (el, selector) ->
+    method = el.matches or el.msMatchesSelector or el.mozMatchesSelector or el.webkitMatchesSelector or el.oMatchesSelector or false
+    if method then method.apply(el, [selector]) else false

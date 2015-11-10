@@ -10,7 +10,7 @@ midpoint = (a, b)->
 
 
 modifier = ()->
-  parseFloat(rand(0,0.3).toPrecision(2))-0.15
+  parseFloat(rand(0,0.15).toPrecision(2))-0.075
 
 
 fuzzify = (str)->

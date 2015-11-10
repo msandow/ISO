@@ -1,5 +1,6 @@
 Tasks = require('./CycleTasks.coffee')
 Render = require('./RenderWorld.coffee')
+Utils = require('./Utils.coffee')
 
 
 SCROLL_COMMAND =
@@ -16,25 +17,30 @@ SCROLL_DETECTION = (evt)->
   evtX = Math.ceil(evt.clientX / MAPFILE.scale)
   evtY = Math.ceil(evt.clientY / MAPFILE.scale)
   
-  GUTTER = 30
+  GUTTERS = 
+    top: 10
+    bottom: 10
+    left: 10
+    right: 10
+  
   SCROLL_COMMAND.x = 0
   SCROLL_COMMAND.y = 0
   scrollLeft = Math.ceil(window.pageXOffset / MAPFILE.scale)
   scrollTop = Math.ceil(window.pageYOffset / MAPFILE.scale)
-  bodyWidth = Math.ceil(document.body.clientWidth / MAPFILE.scale)
-  bodyHeight = Math.ceil(document.body.clientHeight / MAPFILE.scale)
+  bodyWidth = Math.ceil(document.documentElement.clientWidth / MAPFILE.scale)
+  bodyHeight = Math.ceil(document.documentElement.clientHeight / MAPFILE.scale)
 
-  if evtX < GUTTER and scrollLeft
-    SCROLL_COMMAND.x = evtX - GUTTER
+  if evtX < GUTTERS.left and scrollLeft
+    SCROLL_COMMAND.x = -30
   
-  if bodyWidth - evtX < GUTTER and (MAPFILE.world.width > scrollLeft+bodyWidth)
-    SCROLL_COMMAND.x = GUTTER - (bodyWidth - evtX)
+  if bodyWidth - evtX < GUTTERS.right and (MAPFILE.world.width > scrollLeft+bodyWidth)
+    SCROLL_COMMAND.x = 30
 
-  if evtY < GUTTER and scrollTop
-    SCROLL_COMMAND.y = evtY - GUTTER
+  if evtY < GUTTERS.top and scrollTop
+    SCROLL_COMMAND.y = -30
 
-  if bodyHeight - evtY < GUTTER and (MAPFILE.world.height > scrollTop+bodyHeight)
-    SCROLL_COMMAND.y = GUTTER - (bodyHeight - evtY)
+  if bodyHeight - evtY < GUTTERS.bottom and (MAPFILE.world.height > scrollTop+bodyHeight)
+    SCROLL_COMMAND.y = 30
 
   true
 
@@ -54,6 +60,11 @@ ZOOM_DETECTION = (evt)->
   
   if scaleChange
     Render.update()
+    
+    Utils.styleElement(MAPFILE.panel.el,{
+      marginTop: window.pageYOffset + 'px'
+      marginLeft: window.pageXOffset + 'px'
+    })
 #    evtX = Math.ceil(evt.clientX / MAPFILE.scale)
 #    evtY = Math.ceil(evt.clientY / MAPFILE.scale)
 #    scrollLeft = Math.ceil(window.pageXOffset / MAPFILE.scale)
@@ -69,6 +80,37 @@ ZOOM_DETECTION = (evt)->
   false
 
 
+MOVE_PANEL = ->
+  Utils.styleElement(MAPFILE.panel.el,{
+    marginTop: window.pageYOffset + 'px'
+    marginLeft: window.pageXOffset + 'px'
+    top: document.documentElement.clientHeight + 'px'
+  })
+
+
+TOGGLE_FULL_SCREEN = ->
+  vendorProp = (vendor, prop)->
+    return prop if not vendor.length
+    prop = prop.replace('screen', 'Screen') if vendor is 'moz'
+    return vendor + prop[0].toUpperCase() + prop.slice(1)
+    
+  vendor = false
+  vendors = ['','ms','moz','webkit']
+  for v in vendors
+    if document[ vendorProp(v, 'fullscreenElement') ] isnt undefined
+      vendor = v
+      break
+  
+  if vendor is false
+    alert('No fullscreen support in this browser')
+    return
+
+  if !document[ vendorProp(vendor, 'fullscreenElement') ]
+    document.documentElement[ vendorProp(vendor, 'requestFullscreen') ]()
+  else
+    document[ vendorProp(vendor, if vendor is 'moz' then 'cancelFullscreen' else 'exitFullscreen') ]()
+
+
 DEBUG_WORLD = (evt)->
   if evt.target and evt.target.parentElement and evt.target.parentElement._clz
     console.log(evt.target.parentElement._clz)
@@ -82,15 +124,27 @@ module.exports = ->
   Tasks.add(->
     
     if SCROLL_COMMAND.x or SCROLL_COMMAND.y
+      
       window.scrollTo(window.pageXOffset + SCROLL_COMMAND.x, window.pageYOffset + SCROLL_COMMAND.y)
+
+      Utils.styleElement(MAPFILE.panel.el,{
+        marginTop: window.pageYOffset + 'px'
+        marginLeft: window.pageXOffset + 'px'
+      })
   )
   
   document.body.addEventListener('mouseout',SCROLL_RESET)
   
-  #document.addEventListener('mousemove', SCROLL_DETECTION)
+  document.addEventListener('mousemove', SCROLL_DETECTION)
   
   document.addEventListener('mousewheel', ZOOM_DETECTION)
   
   document.addEventListener('DOMMouseScroll', ZOOM_DETECTION)
   
-  MAPFILE.world.el.addEventListener('click', DEBUG_WORLD) if MAPFILE.debug
+  window.addEventListener("resize", MOVE_PANEL)
+  
+  document.body.addEventListener('click',(evt)->
+    DEBUG_WORLD(evt) if MAPFILE.debug and MAPFILE.world.el.contains(evt.target)
+    
+    TOGGLE_FULL_SCREEN() if Utils.matches(evt.target, '.controlPanel .tab .full')
+  )

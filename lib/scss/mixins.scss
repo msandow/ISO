@@ -6,6 +6,7 @@ $VendorPrefixes: (
   ""
 );
 
+
 @mixin vendors($propertyName, $propertyValue){
   @for $i from 1 through length($VendorPrefixes) {
     $vendor: nth($VendorPrefixes, $i);
@@ -13,6 +14,7 @@ $VendorPrefixes: (
     #{ $vendor }#{ $propertyName }: #{ $propertyValue };
   }
 }
+
 
 @mixin css-keyframes($animationName){
   @-webkit-keyframes #{$animationName} {
@@ -29,19 +31,32 @@ $VendorPrefixes: (
   }
 }
 
+
 @mixin textureBuilder($color, $image){
   background:$color url( $image ) top left repeat;
   background-size:50px 50px;
   transform-style: preserve-3d;
 }
 
+
+@mixin boxShadow($x: 0, $y: 0, $blur: 0, $spread: 0, $color: transparent, $inset: false){
+  @if $inset == true{
+    -webkit-box-shadow: inset $x $y $blur $spread $color;
+    box-shadow: inset $x $y $blur $spread $color;
+  }
+  @else{
+    -webkit-box-shadow: $x $y $blur $spread $color;
+    box-shadow: $x $y $blur $spread $color;
+  }
+}
+
+
 @mixin cube($x, $y, $z, $moveUp: false, $subtle: false){
   width:$x;
   height:$y;
   position:absolute;
   background-color:$empty_3d_color;
-  -webkit-box-shadow: inset 0px 0px 50px 0px rgba(0,0,0,0.5);
-  box-shadow: inset 0px 0px 50px 0px rgba(0,0,0,0.5);
+  @include boxShadow(0px, 0px, 50px, 0px, rgba(0,0,0,0.5), true);
   transform-style: preserve-3d;
   
   @if $moveUp == true{
@@ -56,12 +71,10 @@ $VendorPrefixes: (
     transform-style: preserve-3d;
     
     @if $subtle == true{
-      -webkit-box-shadow: inset 0px 0px 50px 0px rgba(0,0,0,0.5);
-      box-shadow: inset 0px 0px 50px 0px rgba(0,0,0,0.5);
+      @include boxShadow(0px, 0px, 50px, 0px, rgba(0,0,0,0.5), true);
     }
     @else{
-      -webkit-box-shadow: inset 0px 0px 50px 0px rgba(0,0,0,1);
-      box-shadow: inset 0px 0px 50px 0px rgba(0,0,0,1);
+      @include boxShadow(0px, 0px, 50px, 0px, rgba(0,0,0,1), true);
     }
   }
   
@@ -94,6 +107,7 @@ $VendorPrefixes: (
   }
 }
 
+
 @mixin transformObject($ob: ()){
   $default: (
     translateZ: 0px,
@@ -115,6 +129,7 @@ $VendorPrefixes: (
   }
 }
 
+
 @mixin spriteTransform($ob: ()){
   $default: (
     rotateX: -45deg,
@@ -129,7 +144,14 @@ $VendorPrefixes: (
   @include transformObject($merge);
 }
 
+
 @mixin clipPath($path: ''){
    -webkit-clip-path: url(##{$path});
     clip-path: url(/##{$path});
+}
+
+
+@mixin round($radius: 0px){
+  border-radius: $radius; 
+  background-clip: padding-box;
 }

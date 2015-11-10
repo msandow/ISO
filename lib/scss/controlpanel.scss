@@ -1,0 +1,55 @@
+@include css-keyframes('showPanel') {
+  0% {
+    background-position:0px 0px;
+  }
+  100% {
+    background-position:-10000px 5000px;
+  }
+}
+
+body{
+  .controlPanel{
+    display:none;
+    position: fixed;
+    left:0px;
+    color:#3b3125;
+    
+    > .mini{
+      position:absolute;
+      bottom:12px;
+      left:12px;
+      width:160px;
+      height:250px;
+      background-color:#e7decf;
+      @include boxShadow(0px, 0px, 20px, 0px, #000);
+      @include round(4px);
+    }
+    
+    > .tab{
+      background-color:#e7decf;
+      position:absolute;
+      bottom:257px;
+      width:130px;
+      left:27px;
+      height:30px;
+      padding:4px;
+      @include boxShadow(0px, 0px, 10px, 0px, #000);
+      @include round(4px);
+      
+      > div{
+        float:left;
+        font-weight:700;
+        background-color:rgba(0,0,0,0.2);
+        padding:2px;
+        cursor:pointer;
+      }
+    }
+  }
+  
+  &.withPanel{
+    .controlPanel{
+      display:block;
+      //@include vendors('animation', 'twinkle 200s linear infinite');
+    }
+  }
+}

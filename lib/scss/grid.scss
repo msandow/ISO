@@ -1,129 +1,132 @@
-body .plane-3d{
+body {
+  .plane-3d{
+    .grid-3d{
+      width:100%;
+      height:100%;
+      transform: translateZ(1px);
 
-  .grid-3d{
-    width:100%;
-    height:100%;
-    transform: translateZ(1px);
-    
-    .grid{
-      width:50px;
-      height:50px;
-      border:2px none rgba(0,0,0,0.25);
-      overflow:hidden;
-      @include textureBuilder($dirt_color, $rocky_texture_1);
-      
-      > div{
-        display:none;
-        transform-style: preserve-3d;
-        
-        &:after{
-          position:absolute;
-          display:none;
-          background-clip: padding-box;
-        }
-      }
-      
-      &.dirt_1,
-      &.sub-dirt_1 > div,
-      &.dirt_1 > div:after{
+      .grid{
+        width:50px;
+        height:50px;
+        border:2px none rgba(0,0,0,0.25);
+        overflow:hidden;
         @include textureBuilder($dirt_color, $rocky_texture_1);
-      }
-      
-      &.grass_1,
-      &.sub-grass_1 > div,
-      &.grass_1 > div:after{
-        @include textureBuilder($grass_color, $leafy_texture_1);
-      }
-      
-      &.grass_2,
-      &.sub-grass_2 > div,
-      &.grass_2 > div:after{
-        @include textureBuilder($grass_darker_color, $leafy_texture_1);
-      }
-      
-      &.grass_3,
-      &.sub-grass_3 > div,
-      &.grass_3 > div:after{
-        @include textureBuilder($grass_yellow_color, $leafy_texture_1);
-      }
-      
-      &.woods_1,
-      &.sub-woods_1 > div,
-      &.woods_1 > div:after{
-        @include textureBuilder($woods_color, $leafy_texture_2);
-      }
-      
-      
-      &.corner-topleft > div,
-      &.corner-topright > div,
-      &.corner-bottomleft > div,
-      &.corner-bottomright > div{
-        width:100%;
-        height:100%;
-        display:block;
-        
-        &:after{
-          content:"";
-          display:block;
-          width:100%;
-          height:100%;          
+
+        > div{
+          display:none;
+          transform-style: preserve-3d;
+
+          &:after{
+            position:absolute;
+            display:none;
+            background-clip: padding-box;
+          }
         }
-      }
-      
-      &.corner-topleft.corner-topright.corner-bottomleft.corner-bottomright > div:after{
-        @include clipPath(all_corners);
-      }
-      
-      &.corner-bottomleft.corner-bottomright > div:after{
-        -webkit-clip-path: url(#bottom_corners);
-        clip-path: url(/#bottom_corners);
-      }
-      
-      &.corner-topright.corner-bottomright > div:after{
-        -webkit-clip-path: url(#right_corners);
-        clip-path: url(/#right_corners);
-      }
-      
-      &.corner-topleft.corner-bottomleft > div:after{
-        -webkit-clip-path: url(#left_corners);
-        clip-path: url(/#left_corners);
-      }
-      
-      &.corner-topleft.corner-topright > div:after{
-        -webkit-clip-path: url(#top_corners);
-        clip-path: url(/#top_corners);
-      }
-      
-      &.corner-bottomright > div:after{
-        -webkit-clip-path: url(#bottom_right_corner);
-        clip-path: url(/#bottom_right_corner);
-      }
-      
-      &.corner-bottomleft > div:after{
-        -webkit-clip-path: url(#bottom_left_corner);
-        clip-path: url(/#bottom_left_corner);
-      }
-      
-      &.corner-topleft > div:after{
-        -webkit-clip-path: url(#top_left_corner);
-        clip-path: url(/#top_left_corner);
-      }
-      
-       &.corner-topright > div:after{
-        -webkit-clip-path: url(#top_right_corner);
-        clip-path: url(/#top_right_corner);
+
+        &.dirt_1,
+        &.sub-dirt_1 > div,
+        &.dirt_1 > div:after{
+          @include textureBuilder($dirt_color, $rocky_texture_1);
+        }
+
+        &.grass_1,
+        &.sub-grass_1 > div,
+        &.grass_1 > div:after{
+          @include textureBuilder($grass_color, $leafy_texture_1);
+        }
+
+        &.grass_2,
+        &.sub-grass_2 > div,
+        &.grass_2 > div:after{
+          @include textureBuilder($grass_darker_color, $leafy_texture_1);
+        }
+
+        &.grass_3,
+        &.sub-grass_3 > div,
+        &.grass_3 > div:after{
+          @include textureBuilder($grass_yellow_color, $leafy_texture_1);
+        }
+
+        &.woods_1,
+        &.sub-woods_1 > div,
+        &.woods_1 > div:after{
+          @include textureBuilder($woods_color, $leafy_texture_2);
+        }
+
+
+        &.corner-topleft > div,
+        &.corner-topright > div,
+        &.corner-bottomleft > div,
+        &.corner-bottomright > div{
+          width:100%;
+          height:100%;
+          display:block;
+
+          &:after{
+            content:"";
+            display:block;
+            width:100%;
+            height:100%;          
+          }
+        }
+
+        &.corner-topleft.corner-topright.corner-bottomleft.corner-bottomright > div:after{
+          @include clipPath(all_corners);
+        }
+
+        &.corner-bottomleft.corner-bottomright > div:after{
+          -webkit-clip-path: url(#bottom_corners);
+          clip-path: url(/#bottom_corners);
+        }
+
+        &.corner-topright.corner-bottomright > div:after{
+          -webkit-clip-path: url(#right_corners);
+          clip-path: url(/#right_corners);
+        }
+
+        &.corner-topleft.corner-bottomleft > div:after{
+          -webkit-clip-path: url(#left_corners);
+          clip-path: url(/#left_corners);
+        }
+
+        &.corner-topleft.corner-topright > div:after{
+          -webkit-clip-path: url(#top_corners);
+          clip-path: url(/#top_corners);
+        }
+
+        &.corner-bottomright > div:after{
+          -webkit-clip-path: url(#bottom_right_corner);
+          clip-path: url(/#bottom_right_corner);
+        }
+
+        &.corner-bottomleft > div:after{
+          -webkit-clip-path: url(#bottom_left_corner);
+          clip-path: url(/#bottom_left_corner);
+        }
+
+        &.corner-topleft > div:after{
+          -webkit-clip-path: url(#top_left_corner);
+          clip-path: url(/#top_left_corner);
+        }
+
+         &.corner-topright > div:after{
+          -webkit-clip-path: url(#top_right_corner);
+          clip-path: url(/#top_right_corner);
+        }
       }
     }
   }
   
   &.withGrid{
-    .grid-3d{
-      .grid{
-        border-top-style:dashed;
-        border-left-style:dashed;
-        
-        &.left{
-          border-left-style:none;
+    .plane-3d{
+      .grid-3d{
+        .grid{
+          border-top-style:dashed;
+          border-left-style:dashed;
+
+          &.left{
+            border-left-style:none;
+          }
         }
       }
     }
