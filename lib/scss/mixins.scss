@@ -55,8 +55,8 @@ $VendorPrefixes: (
   width:$x;
   height:$y;
   position:absolute;
-  background-color:$empty_3d_color;
-  @include boxShadow(0px, 0px, 50px, 0px, rgba(0,0,0,0.5), true);
+  background-color:lighten($empty_3d_color,10%);
+  @include boxShadow(0px, 0px, 50px, 0px, rgba(0,0,0,0.25), true);
   transform-style: preserve-3d;
   
   @if $moveUp == true{
@@ -71,7 +71,7 @@ $VendorPrefixes: (
     transform-style: preserve-3d;
     
     @if $subtle == true{
-      @include boxShadow(0px, 0px, 50px, 0px, rgba(0,0,0,0.5), true);
+      @include boxShadow(0px, 0px, 50px, 0px, rgba(0,0,0,0.3), true);
     }
     @else{
       @include boxShadow(0px, 0px, 50px, 0px, rgba(0,0,0,1), true);
@@ -79,7 +79,7 @@ $VendorPrefixes: (
   }
   
   > .side{
-    background-color:lighten($empty_3d_color,10%);
+    background-color:darken($empty_3d_color,10%);
     left:100%;
     top:0%;
     height:100%;
@@ -92,7 +92,7 @@ $VendorPrefixes: (
   }
 
   > .front{
-    background-color:darken($empty_3d_color,10%);
+    background-color:$empty_3d_color;
     left:0%;
     top:100%;
     width:100%;

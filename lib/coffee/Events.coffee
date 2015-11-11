@@ -60,91 +60,54 @@ ZOOM_DETECTION = (evt)->
   
   if scaleChange
     Render.update()
-    
-    Utils.styleElement(MAPFILE.panel.el,{
-      marginTop: window.pageYOffset + 'px'
-      marginLeft: window.pageXOffset + 'px'
-    })
-#    evtX = Math.ceil(evt.clientX / MAPFILE.scale)
-#    evtY = Math.ceil(evt.clientY / MAPFILE.scale)
-#    scrollLeft = Math.ceil(window.pageXOffset / MAPFILE.scale)
-#    scrollTop = Math.ceil(window.pageYOffset / MAPFILE.scale)
-#    bodyWidth = Math.ceil(document.body.clientWidth / MAPFILE.scale)
-#    bodyHeight = Math.ceil(document.body.clientHeight / MAPFILE.scale)
-#
-#    window.scrollTo(
-#      scrollLeft + evtX - Math.floor(bodyWidth/2),
-#      scrollTop + evtY - Math.floor(bodyHeight/2)
-#    )
   
   false
 
 
-MOVE_PANEL = ->
-  Utils.styleElement(MAPFILE.panel.el,{
-    marginTop: window.pageYOffset + 'px'
-    marginLeft: window.pageXOffset + 'px'
-    top: document.documentElement.clientHeight + 'px'
-  })
-
-
-TOGGLE_FULL_SCREEN = ->
-  vendorProp = (vendor, prop)->
-    return prop if not vendor.length
-    prop = prop.replace('screen', 'Screen') if vendor is 'moz'
-    return vendor + prop[0].toUpperCase() + prop.slice(1)
-    
-  vendor = false
-  vendors = ['','ms','moz','webkit']
-  for v in vendors
-    if document[ vendorProp(v, 'fullscreenElement') ] isnt undefined
-      vendor = v
-      break
-  
-  if vendor is false
-    alert('No fullscreen support in this browser')
-    return
-
-  if !document[ vendorProp(vendor, 'fullscreenElement') ]
-    document.documentElement[ vendorProp(vendor, 'requestFullscreen') ]()
+DELEGATE_EVENT = (key, evt, global = false)->
+  if global
+    for own type, arr of MAPFILE.members
+      for mem in arr when typeof mem.events[key] is 'function'
+        mem.events[key](evt)
   else
-    document[ vendorProp(vendor, if vendor is 'moz' then 'cancelFullscreen' else 'exitFullscreen') ]()
+    tar = evt.target
+    found = false
 
+    while tar.parentNode and !found
+      found = tar._clz if tar._clz
+      tar = tar.parentNode
 
-DEBUG_WORLD = (evt)->
-  if evt.target and evt.target.parentElement and evt.target.parentElement._clz
-    console.log(evt.target.parentElement._clz)
-  else if evt.target._clz
-    console.log(evt.target._clz)
-  true
+    if found and typeof found.events[key] is 'function'
+      found.events[key](evt)
 
 
 module.exports = ->
   
-  Tasks.add(->
-    
-    if SCROLL_COMMAND.x or SCROLL_COMMAND.y
-      
-      window.scrollTo(window.pageXOffset + SCROLL_COMMAND.x, window.pageYOffset + SCROLL_COMMAND.y)
-
-      Utils.styleElement(MAPFILE.panel.el,{
-        marginTop: window.pageYOffset + 'px'
-        marginLeft: window.pageXOffset + 'px'
-      })
+  Tasks.add(->    
+    if SCROLL_COMMAND.x or SCROLL_COMMAND.y      
+      window.scrollTo(window.pageXOffset + SCROLL_COMMAND.x, window.pageYOffset + SCROLL_COMMAND.y)      
+      MAPFILE.members.controlPanel[0].restyle()
   )
   
-  document.body.addEventListener('mouseout',SCROLL_RESET)
+  document.body.addEventListener('mouseout', (evt)->
+    SCROLL_RESET()
+    DELEGATE_EVENT('mouseout', evt)
+  )
   
-  document.addEventListener('mousemove', SCROLL_DETECTION)
+  document.addEventListener('mousemove', (evt)->
+    SCROLL_DETECTION(evt)
+    DELEGATE_EVENT('mousemove', evt)
+  )
   
-  document.addEventListener('mousewheel', ZOOM_DETECTION)
+  document.addEventListener(window.MODERN.mouseWheelEvent, (evt)->
+    ZOOM_DETECTION(evt)
+    DELEGATE_EVENT('mousewheel', evt, true)
+  )
   
-  document.addEventListener('DOMMouseScroll', ZOOM_DETECTION)
-  
-  window.addEventListener("resize", MOVE_PANEL)
+  window.addEventListener("resize", (evt)->
+    DELEGATE_EVENT('resize', evt, true)
+  )
   
   document.body.addEventListener('click',(evt)->
-    DEBUG_WORLD(evt) if MAPFILE.debug and MAPFILE.world.el.contains(evt.target)
-    
-    TOGGLE_FULL_SCREEN() if Utils.matches(evt.target, '.controlPanel .tab .full')
+    DELEGATE_EVENT('click', evt)
   )

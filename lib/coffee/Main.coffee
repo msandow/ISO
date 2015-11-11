@@ -2,7 +2,7 @@ module.exports = ->
   setTimeout(->
     window.MAPFILE = require('./../maps/debug.coffee')
 
-    if !require('./Detect3D.coffee')()
+    if !require('./Modern.coffee')()
       alert('No 3D support in this browser')
       return
 

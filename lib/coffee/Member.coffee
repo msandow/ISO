@@ -10,11 +10,13 @@ module.exports = class
     @type = "" if @type is undefined
     @data = {} if @data is undefined
     @structure = '<div></div>' if @structure is undefined
+    @events = {} if @events is undefined
     
     @
   
   spawn: ->
     @el = Utils.stringToDOM(@structure)
+    @el.normalize()
     @el._clz = @
     
     for type in @type.split('-')

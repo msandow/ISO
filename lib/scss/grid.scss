@@ -75,43 +75,35 @@ body {
         }
 
         &.corner-bottomleft.corner-bottomright > div:after{
-          -webkit-clip-path: url(#bottom_corners);
-          clip-path: url(/#bottom_corners);
+          @include clipPath(bottom_corners);
         }
 
         &.corner-topright.corner-bottomright > div:after{
-          -webkit-clip-path: url(#right_corners);
-          clip-path: url(/#right_corners);
+          @include clipPath(right_corners);
         }
 
         &.corner-topleft.corner-bottomleft > div:after{
-          -webkit-clip-path: url(#left_corners);
-          clip-path: url(/#left_corners);
+          @include clipPath(left_corners);
         }
 
         &.corner-topleft.corner-topright > div:after{
-          -webkit-clip-path: url(#top_corners);
-          clip-path: url(/#top_corners);
+          @include clipPath(top_corners);
         }
 
         &.corner-bottomright > div:after{
-          -webkit-clip-path: url(#bottom_right_corner);
-          clip-path: url(/#bottom_right_corner);
+          @include clipPath(bottom_right_corner);
         }
 
         &.corner-bottomleft > div:after{
-          -webkit-clip-path: url(#bottom_left_corner);
-          clip-path: url(/#bottom_left_corner);
+          @include clipPath(bottom_left_corner);
         }
 
         &.corner-topleft > div:after{
-          -webkit-clip-path: url(#top_left_corner);
-          clip-path: url(/#top_left_corner);
+          @include clipPath(top_left_corner);
         }
 
          &.corner-topright > div:after{
-          -webkit-clip-path: url(#top_right_corner);
-          clip-path: url(/#top_right_corner);
+          @include clipPath(top_right_corner);
         }
       }
     }

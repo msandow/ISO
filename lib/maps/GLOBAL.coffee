@@ -27,9 +27,6 @@ module.exports = class
       offsetLeft: null
       offsetTop: null
     
-    @panel =
-      el: document.querySelector('body > .controlPanel')
-    
     @
 
 

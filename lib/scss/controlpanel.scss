@@ -9,7 +9,6 @@
 
 body{
   .controlPanel{
-    display:none;
     position: fixed;
     left:0px;
     color:#3b3125;
@@ -45,11 +44,6 @@ body{
       }
     }
   }
-  
-  &.withPanel{
-    .controlPanel{
-      display:block;
-      //@include vendors('animation', 'twinkle 200s linear infinite');
-    }
-  }
+  //@include vendors('animation', 'twinkle 200s linear infinite');
+
 }

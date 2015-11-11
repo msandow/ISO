@@ -5,3 +5,4 @@ module.exports =
     bush: require('./../coffee/landscapes/bush.coffee')
     tree: require('./../coffee/landscapes/tree.coffee')
     grass: require('./../coffee/landscapes/grass.coffee')
+    boulder: require('./../coffee/landscapes/boulder.coffee')

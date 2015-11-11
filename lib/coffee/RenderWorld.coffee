@@ -1,6 +1,7 @@
 Grid = require('./Grid.coffee')
 Utils = require('./Utils.coffee')
 Items = require('./Items.coffee')
+ControlPanel = require('./ControlPanel.coffee')
 
 
 applyWorldValues = ()->
@@ -36,8 +37,8 @@ setUpWorldSpace = ()->
 
 setUpWorldGrid = ()->
   
-  if MAPFILE.debug
-    document.body.className = if document.body.className then document.body.className + " withGrid" else "withGrid"
+  #if MAPFILE.debug
+  #  document.body.className = if document.body.className then document.body.className + " withGrid" else "withGrid"
   
   el = document.createElement('div')
   el.className = 'grid-3d'
@@ -56,12 +57,6 @@ setUpWorldGrid = ()->
     y++
 
 
-setUpControlPanel = ->
-
-  document.body.className = document.body.className + " withPanel"
-  MAPFILE.panel.el.style.top = document.documentElement.clientHeight + 'px'
-
-
 module.exports =
   
   setUp: ->
@@ -70,8 +65,10 @@ module.exports =
     setUpWorldSpace()
     window.scrollTo(Math.floor(MAPFILE.world.width/2) - Math.floor(document.body.clientWidth/2), 0)
     setUpWorldGrid()
-    setUpControlPanel()
     MAPFILE.importMembers()
+    
+    CP = new ControlPanel().spawn().restyle()
+    document.body.appendChild(CP.el)
 
     true
 

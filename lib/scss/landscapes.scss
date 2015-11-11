@@ -1,6 +1,7 @@
 $bushPerspective: (237/171);
-$treePerspective: (184/235);
+$treePerspective: (180/234);
 $grassPerspective: (194/188);
+$boulderPerspective: (243/191);
 
 body .plane-3d{
   .landscape{
@@ -76,6 +77,17 @@ body .plane-3d{
           translateX: 8px
         ));
       }
+    }
+    
+    &.boulder{
+      width:62px;
+      height:62px/$boulderPerspective;
+      background-image:url($boulder_sprite);
+      @include spriteTransform((
+        translateY: -10px,
+        translateZ: 21px,
+        translateX: -10px
+      ));
     }
   }
 }
