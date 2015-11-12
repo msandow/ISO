@@ -10,14 +10,6 @@ applyWorldValues = ()->
   MAPFILE.world.offsetLeft = Math.round((10.3432*MAPFILE.mapSize + 0.451074) + (706.971*MAPFILE.scale - 706.771))
   MAPFILE.world.offsetTop = Math.round((-3.72692*MAPFILE.mapSize - 38.6154) + (422.971*MAPFILE.scale - 422.771))
 
-  for ter, idx in MAPFILE.terrain when [1,2].indexOf(ter) > -1
-    if ter is 1 and 0.35 < Math.random() < 0.65
-      c = Utils.IdxToXY(idx)
-      MAPFILE.imports.push( new Items.landscape.grass(c.x, c.y) )
-    if ter is 2 and 0.1 < Math.random() < 0.9
-      c = Utils.IdxToXY(idx)
-      MAPFILE.imports.push( new Items.landscape.grass(c.x, c.y) )
-
 
 setUpWorldSpace = ()->
   
@@ -37,8 +29,8 @@ setUpWorldSpace = ()->
 
 setUpWorldGrid = ()->
   
-  #if MAPFILE.debug
-  #  document.body.className = if document.body.className then document.body.className + " withGrid" else "withGrid"
+  if MAPFILE.debug
+    document.body.className = if document.body.className then document.body.className + " withGrid" else "withGrid"
   
   el = document.createElement('div')
   el.className = 'grid-3d'
@@ -66,13 +58,27 @@ module.exports =
     window.scrollTo(Math.floor(MAPFILE.world.width/2) - Math.floor(document.body.clientWidth/2), 0)
     setUpWorldGrid()
     MAPFILE.importMembers()
+    @sprinkle()    
     
     CP = new ControlPanel().spawn().restyle()
     document.body.appendChild(CP.el)
-
+    
     true
 
 
   update: ->
     applyWorldValues()
     setUpWorldSpace()
+
+
+  sprinkle: ->
+    for ter, idx in MAPFILE.terrain when [1,2].indexOf(ter) > -1 and !MAPFILE.members.grid[idx].data.children.length
+      newItem = false
+      if ter is 1 and 0.35 < Math.random() < 0.65
+        c = Utils.IdxToXY(idx)
+        newItem = new Items.landscape.grass(c.x, c.y)
+      if ter is 2 and 0.1 < Math.random() < 0.9
+        c = Utils.IdxToXY(idx)
+        newItem = new Items.landscape.grass(c.x, c.y)
+      if newItem
+        MAPFILE.addItemToWorld(newItem)

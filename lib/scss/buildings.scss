@@ -1,15 +1,24 @@
 body .plane-3d{
   .building{
-    @include cube(50px,50px,50px,true,true);
+    @include spriteTransform();
 
 
     &.test-building{
-      opacity:0.75;
-      //border:2px solid rgba(0,0,0,0.5);
-      //background-image:url('images/building_test.png');
-      > .front, > .side{
-        //border:2px solid rgba(0,0,0,0.5);
-      }
+      @include gridedSprite(1,1,250/225,'images/test_iso_2x2.png');
+      @include spriteTransform((
+        translateY: -34px,
+        translateZ: 130px,
+        translateX: -22px
+      ));
+    }
+    
+    &.house-1{
+      @include gridedSprite(2,2,364/226,'images/building_house_1.png');
+      @include spriteTransform((
+        translateY: -23px,
+        translateZ: 127px,
+        translateX: -38px
+      ));
     }
   }
 }

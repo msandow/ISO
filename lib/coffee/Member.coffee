@@ -10,10 +10,19 @@ module.exports = class
     @type = "" if @type is undefined
     @data = {} if @data is undefined
     @structure = '<div></div>' if @structure is undefined
-    @events = {} if @events is undefined
     
+    if @events is undefined    
+      @events = 
+        click: @clickHandler
+
     @
-  
+
+
+  clickHandler: (evt)=>
+    console.log(@) if MAPFILE.debug
+    true
+
+
   spawn: ->
     @el = Utils.stringToDOM(@structure)
     @el.normalize()

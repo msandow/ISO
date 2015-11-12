@@ -37,14 +37,6 @@ module.exports = class extends Member
     @height = 1
     @idx = Utils.XYtoIdx(@x,@y)
     @terrainId = MAPFILE.terrain[ Utils.XYtoIdx(@x, @y) ]
-    
-    @events =
-      click: @clickHandler
-
-
-  clickHandler: (evt)=>
-    console.log(@) if MAPFILE.debug
-    true
 
 
   classNameGenerator: ->

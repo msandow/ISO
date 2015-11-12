@@ -32,9 +32,28 @@ $VendorPrefixes: (
 }
 
 
-@mixin textureBuilder($color, $image){
-  background:$color url( $image ) top left repeat;
-  background-size:50px 50px;
+@mixin textureBuilder($color, $image, $autoSize: true){
+  @if type-of($image) == list{
+    $concat: ();
+    
+    @for $i from 1 through length($image) {
+      $theUrl: nth($image, $i);
+      
+      $concat: append($concat, (url( $theUrl )), comma);
+    }
+    
+    background-image: $concat;
+  }
+  @else{
+    background-image: url( $image );
+  }
+  
+  background-position: top left;
+  @if $autoSize == true{
+    background-size:100% 100%;
+  }
+  background-repeat:repeat;
+  background-color:$color;
   transform-style: preserve-3d;
 }
 
@@ -55,12 +74,11 @@ $VendorPrefixes: (
   width:$x;
   height:$y;
   position:absolute;
-  background-color:lighten($empty_3d_color,10%);
   @include boxShadow(0px, 0px, 50px, 0px, rgba(0,0,0,0.25), true);
   transform-style: preserve-3d;
   
   @if $moveUp == true{
-    transform: translateZ(50px);
+    transform: translateZ($z+1);
   }
   
   *{
@@ -79,10 +97,14 @@ $VendorPrefixes: (
   }
   
   > .side{
-    background-color:darken($empty_3d_color,10%);
     left:100%;
     top:0%;
-    height:100%;
+    @if $y == auto{    
+      height:100%;
+    }
+    @else{
+      height:$y;
+    }
     width:$z;
     @include transformObject((
       rotateY: 90deg,
@@ -92,10 +114,14 @@ $VendorPrefixes: (
   }
 
   > .front{
-    background-color:$empty_3d_color;
     left:0%;
     top:100%;
-    width:100%;
+    @if $x == auto{    
+      width:100%;
+    }
+    @else{
+      width:$x;
+    }
     height:$z;
     @include transformObject((
       rotateX: 90deg,
@@ -134,7 +160,7 @@ $VendorPrefixes: (
   $default: (
     rotateX: -45deg,
     rotateY: 45deg,
-    rotateZ: -28.8deg,
+    rotateZ: -29.4deg,
     translateZ: 25px,
     translateY: -12px
   );
@@ -154,4 +180,12 @@ $VendorPrefixes: (
 @mixin round($radius: 0px){
   border-radius: $radius; 
   background-clip: padding-box;
+}
+
+
+@mixin gridedSprite($xs: 1, $ys: 1, $ratio: 1, $image: ''){
+  $sizeMod: 1.41422;
+  width: 50px * $xs * $sizeMod;
+  height: 50px * $xs / $ratio * $sizeMod;
+  background:transparent url( $image ) top left/100% 100% no-repeat;
 }

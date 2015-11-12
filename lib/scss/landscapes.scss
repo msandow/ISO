@@ -5,12 +5,12 @@ $boulderPerspective: (243/191);
 
 body .plane-3d{
   .landscape{
+    @include spriteTransform();
     position:absolute;
     transform: translateZ(1px);
     background-size:100% 100%;
     width:50px;
-    height:50px;
-    @include spriteTransform();
+    height:50px;    
     
     &.bush{
       width:25px;
@@ -84,9 +84,9 @@ body .plane-3d{
       height:62px/$boulderPerspective;
       background-image:url($boulder_sprite);
       @include spriteTransform((
-        translateY: -10px,
-        translateZ: 21px,
-        translateX: -10px
+        translateY: -12px,
+        translateZ: 26px,
+        translateX: -12px
       ));
     }
   }

@@ -2,8 +2,7 @@ jobs = []
 
 (do->
   GAME_ENGINE = ()->
-    for job in jobs
-      job()
+    job() for job in jobs
     
     setTimeout(GAME_ENGINE, Math.round(1000 / (MAPFILE.clock * MAPFILE.clockMultiplier)))
   
@@ -12,5 +11,13 @@ jobs = []
 
 module.exports =
   add: (j)->
-    jobs.push(j)
-    jobs.length-1
+    idx = jobs.length
+    o = {
+      idx: idx
+      remove: ()->
+        jobs.splice(idx, 1)
+    }
+
+    jobs.push(j.bind(null, o))
+    
+    o

@@ -1,17 +1,18 @@
 @include css-keyframes('showPanel') {
   0% {
-    background-position:0px 0px;
+    left:-300px;
   }
   100% {
-    background-position:-10000px 5000px;
+    left:0px;
   }
 }
 
 body{
   .controlPanel{
     position: fixed;
-    left:0px;
     color:#3b3125;
+    @include vendors('animation', 'showPanel 500ms linear 1');
+    left:0px;
     
     > .mini{
       position:absolute;
@@ -44,6 +45,4 @@ body{
       }
     }
   }
-  //@include vendors('animation', 'twinkle 200s linear infinite');
-
 }

@@ -64,14 +64,38 @@ module.exports = class
         point = ex[ ex.length - 1 ]
         
       idx++
+    
+    ex.map((i)->
+      "#{i.run}x#{i.value}"
+    )
 
-    ex
+
+  addItemToWorld: (item)->
+    item.spawn().restyle()
+    @world.el.appendChild(item.el)
+    
+    startX = item.x
+    startY = item.y
+    endX = item.x + item.width
+    endY = item.y + item.height
+    
+    while startY < endY
+      startX = item.x
+      while startX < endX
+
+        grid = @members.grid[ Utils.XYtoIdx(startX, startY) ]
+        grid.data.children.push(item)
+        item.data.parents.push(grid)
+
+        startX++
+
+      startY++      
+    
+    @
 
 
   importMembers: ()->
     for imp in @imports
-      imp.spawn().restyle()
-      @world.el.appendChild(imp.el)
-      grid = @members.grid[ Utils.XYtoIdx(imp.x, imp.y) ]
-      grid.data.children.push(imp)
-      imp.parent = grid
+      @addItemToWorld(imp)
+    
+    @
