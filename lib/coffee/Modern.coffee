@@ -65,6 +65,8 @@ normalize = ->
     if method then method.apply(el, [selector]) else false
 
   window.MODERN.mouseWheelEvent = if document.onmousewheel isnt undefined then 'mousewheel' else 'DOMMouseScroll'
+  
+  window.MODERN.ajaxClient = if XMLHttpRequest then XMLHttpRequest else ActiveXObject
 
 module.exports = ->
   normalize()

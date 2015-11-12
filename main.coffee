@@ -2,6 +2,7 @@ express = require('express')
 app = express()
 bodyParser = require('body-parser')
 Boxy = require('BoxyBrown')
+fs = require('fs')
 
 
 module.exports = ->
@@ -25,12 +26,27 @@ module.exports = ->
 
   Router.use(
     express.static("#{__dirname}/public", setHeaders: (res, file, stats) ->
+      res.set({
+        'Pragma-directive': 'no-cache'
+        'Cache-directive': 'no-cache'
+        'Cache-control': 'no-cache'
+        'Pragma': 'no-cache'
+        'Expires': 0
+      })
+      
       if /\.map$/i.test(file) and !res.headersSent
         res.set('Content-Type', 'application/json')
       return
     )
   )
-
+  
+  Router.get('/resources', (req, res)->
+    fs.readdir(__dirname+"/public/images",(err, files)->
+      res.send(files.map((i)->
+        "images/#{i}"
+      ))
+    )
+  )
 
   app.use(Router)
   

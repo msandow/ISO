@@ -20,7 +20,8 @@ module.exports = new global(
     a = []
     
     a.push(new Items.building.test(2,2))
-    a.push(new Items.building.house(3,2))
+    a.push(new Items.building.house(4,2,1))
+    a.push(new Items.building.house(6,2,2))
     a.push(new Items.landscape.bush(7,8))
     a.push(new Items.landscape.tree(6,8))
     a.push(new Items.landscape.tree(7,9))

@@ -13,11 +13,22 @@ body .plane-3d{
     }
     
     &.house-1{
-      @include gridedSprite(2,2,364/226,'images/building_house_1.png');
+      @include gridedSprite(2,2,159/140,'images/building_house_1.png');
       @include spriteTransform((
-        translateY: -23px,
-        translateZ: 127px,
-        translateX: -38px
+        translateY: -26px,
+        translateZ: 11px,
+        translateX: -6px,
+        scale: 0.4
+      ));
+    }
+    
+    &.house-2{
+      @include gridedSprite(2,2,306/254,'images/building_house_2.png');
+      @include spriteTransform((
+        translateY: -26px,
+        translateZ: 25px,
+        translateX: -11px,
+        scale: 0.55
       ));
     }
   }

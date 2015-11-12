@@ -60,3 +60,16 @@ module.exports =
       point = k
     
     return if /[\D]/.test(point) then point else parseInt(point)
+
+
+  ajax: (type, url, data, cb=(->))->
+    x = new window.MODERN.ajaxClient('MSXML2.XMLHTTP.3.0')
+    x.open(type.toUpperCase(), url, 1)
+    x.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+    x.setRequestHeader('Content-type', 'application/json;charset=UTF-8');
+    
+    x.onreadystatechange = ->
+      cb(x.responseText, x) if x.readyState is 4
+    
+    x.send(JSON.stringify(data))
+  

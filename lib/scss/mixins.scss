@@ -187,5 +187,5 @@ $VendorPrefixes: (
   $sizeMod: 1.41422;
   width: 50px * $xs * $sizeMod;
   height: 50px * $xs / $ratio * $sizeMod;
-  background:transparent url( $image ) top left/100% 100% no-repeat;
+  background:transparent url( $image ) top center/100% 100% no-repeat;
 }
