@@ -17,7 +17,7 @@ terrainIdToClass = (id)->
         }
         {
           value: ' grass_3'
-          weight: 10
+          weight: 5
         }
       ])
     when Terrain.WOODS then ' woods_1'
