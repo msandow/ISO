@@ -21,6 +21,9 @@ module.exports = ->
       
       checker = (img)->
         ->
+          img.removeEventListener("error", img.__loader)
+          img.removeEventListener("load", img.__loader)
+          img.removeEventListener("abort", img.__loader)
           document.body.removeChild(img)
           total--
           console.log("** #{total} left")
@@ -29,9 +32,11 @@ module.exports = ->
       for src in files
         
         img = document.createElement('img')
+        img.__loader = checker(img)
         img.style.display = 'none'
-        img.addEventListener("error",checker(img))
-        img.addEventListener("load",checker(img))
+        img.addEventListener("error",img.__loader)
+        img.addEventListener("load",img.__loader)
+        img.addEventListener("abort",img.__loader)
         document.body.appendChild(img)
         img.setAttribute("src", src)
     )

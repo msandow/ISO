@@ -38,13 +38,19 @@ body {
         &.grass_2,
         &.sub-grass_2 > div,
         &.grass_2 > div:after{
-          @include textureBuilder($grass_darker_color, $rocky_texture_1);
+          @include textureBuilder($grass_darker_color, $leafy_texture_1);
         }
 
         &.grass_3,
         &.sub-grass_3 > div,
         &.grass_3 > div:after{
           @include textureBuilder($grass_gray_color, $rocky_texture_1);
+        }
+        
+        &.grass_4,
+        &.sub-grass_4 > div,
+        &.grass_4 > div:after{
+          @include textureBuilder($grass_brown_color, $rocky_texture_1);
         }
 
         &.woods_1,

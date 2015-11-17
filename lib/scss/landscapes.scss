@@ -1,4 +1,4 @@
-$bushPerspective: (237/171);
+$bushPerspective: (226/169);
 $treePerspective: (180/234);
 $grassPerspective: (194/188);
 $boulderPerspective: (243/191);
@@ -13,6 +13,7 @@ body .plane-3d{
     height:50px;    
     
     &.bush{
+      opacity:0.95;
       width:25px;
       height:25px/$bushPerspective;
       background-image:url($bush_sprite);
@@ -24,6 +25,7 @@ body .plane-3d{
     }
     
     &.grass{
+      opacity:0.75;
       width:20px;
       height:20px/$grassPerspective;
       background-image:url($grass_sprite);

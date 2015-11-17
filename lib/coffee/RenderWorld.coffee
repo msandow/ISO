@@ -2,6 +2,7 @@ Grid = require('./Grid.coffee')
 Utils = require('./Utils.coffee')
 Items = require('./Items.coffee')
 ControlPanel = require('./ControlPanel.coffee')
+Terrain = require('./../maps/TERRAIN.coffee')
 
 
 applyWorldValues = ()->
@@ -50,15 +51,50 @@ setUpWorldGrid = ()->
 
 
 sprinkle = ->
-  for ter, idx in MAPFILE.terrain when [1,2].indexOf(ter) > -1 and !MAPFILE.members.grid[idx].data.children.length
+  weightArr = [
+    {
+      value: 'grass'
+      weight: 0
+    }
+    {
+      value: 'bush'
+      weight: 0
+    }
+    {
+      value: 'tree'
+      weight: 0
+    }
+    {
+      value: false
+      weight: 0
+    }
+  ]
+
+  for ter, idx in MAPFILE.terrain when !MAPFILE.members.grid[idx].data.children.length
+    
     newItem = false
-    if ter is 1 and 0.35 < Math.random() < 0.65
-      c = Utils.IdxToXY(idx)
-      newItem = new Items.landscape.grass(c.x, c.y)
-    if ter is 2 and 0.1 < Math.random() < 0.9
-      c = Utils.IdxToXY(idx)
-      newItem = new Items.landscape.grass(c.x, c.y)
+
+    if ter is Terrain.GRASS
+
+      weightArr[0].weight = 15
+      weightArr[1].weight = 7
+      weightArr[2].weight = 1
+      weightArr[3].weight = 50
+
+      newItem = Utils.weightedRandom(weightArr)
+
+    else if ter is Terrain.WOODS
+
+      weightArr[0].weight = 5
+      weightArr[1].weight = 5
+      weightArr[2].weight = 15
+      weightArr[3].weight = 1
+
+      newItem = Utils.weightedRandom(weightArr)
+
     if newItem
+      c = Utils.IdxToXY(idx)
+      newItem = new Items.landscape[ newItem ](c.x, c.y)
       MAPFILE.addItemToWorld(newItem)
 
 

@@ -6,6 +6,7 @@ body{
 
     > .front, > .side{
       @include textureBuilder($dirt_color, $rocky_texture_1);
+      background-size:50px 50px;
     }
   }
 }
