@@ -15,9 +15,9 @@ body .plane-3d{
     &.house-1{
       @include gridedSprite(2,2,159/140,'images/building_house_1.png');
       @include spriteTransform((
-        translateY: -26px,
+        translateY: -25px,
         translateZ: 11px,
-        translateX: -6px,
+        translateX: -8px,
         scale: 0.4
       ));
     }
@@ -30,6 +30,23 @@ body .plane-3d{
         translateX: -11px,
         scale: 0.55
       ));
+    }
+    
+    &.road-1{
+      @include transformObject((
+        translateZ: 1px,
+        translateX: 0px,
+        translateY: 0px,
+        rotateX: 0deg,
+        rotateY: 0deg,
+        rotateZ: 0deg,
+        scale: 1
+      ));
+    
+      @include textureBuilder(transparent, $road_texture);
+      width:50px;
+      height:50px;
+      @include clipPath(all_corners);
     }
   }
 }

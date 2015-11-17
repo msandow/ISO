@@ -49,6 +49,19 @@ setUpWorldGrid = ()->
     y++
 
 
+sprinkle = ->
+  for ter, idx in MAPFILE.terrain when [1,2].indexOf(ter) > -1 and !MAPFILE.members.grid[idx].data.children.length
+    newItem = false
+    if ter is 1 and 0.35 < Math.random() < 0.65
+      c = Utils.IdxToXY(idx)
+      newItem = new Items.landscape.grass(c.x, c.y)
+    if ter is 2 and 0.1 < Math.random() < 0.9
+      c = Utils.IdxToXY(idx)
+      newItem = new Items.landscape.grass(c.x, c.y)
+    if newItem
+      MAPFILE.addItemToWorld(newItem)
+
+
 module.exports =
   
   setUp: ->
@@ -58,7 +71,8 @@ module.exports =
     window.scrollTo(Math.floor(MAPFILE.world.width/2) - Math.floor(document.body.clientWidth/2), 0)
     setUpWorldGrid()
     MAPFILE.importMembers()
-    @sprinkle()    
+    @assignRoadAngles()
+    sprinkle()    
     
     CP = new ControlPanel().spawn().restyle()
     document.body.appendChild(CP.el)
@@ -71,14 +85,28 @@ module.exports =
     setUpWorldSpace()
 
 
-  sprinkle: ->
-    for ter, idx in MAPFILE.terrain when [1,2].indexOf(ter) > -1 and !MAPFILE.members.grid[idx].data.children.length
-      newItem = false
-      if ter is 1 and 0.35 < Math.random() < 0.65
-        c = Utils.IdxToXY(idx)
-        newItem = new Items.landscape.grass(c.x, c.y)
-      if ter is 2 and 0.1 < Math.random() < 0.9
-        c = Utils.IdxToXY(idx)
-        newItem = new Items.landscape.grass(c.x, c.y)
-      if newItem
-        MAPFILE.addItemToWorld(newItem)
+  assignRoadAngles: ->
+    if MAPFILE.members.road and MAPFILE.members.road.length
+      
+      cache = {}
+      
+      for r in MAPFILE.members.road
+        adj = r.getAdjacentPositions().filter((g)->
+          g.data.children.filter((c)-> c.type is 'building-road' ).length
+        )
+        
+        pos =
+          top: false
+          right: false
+          bottom: false
+          left: false
+        
+        for a in adj when cache["#{a.x}-#{a.y}"] is undefined        
+          cache["#{a.x}-#{a.y}"] = true
+          pos.top = true if a.y is r.y - 1
+          pos.right = true if a.x is r.x + 1
+          pos.bottom = true if a.y is r.y + 1
+          pos.left = true if a.x is r.x - 1
+        
+        r.data.around = pos
+        r.restyle()

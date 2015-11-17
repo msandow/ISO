@@ -26,6 +26,8 @@ module.exports = new global(
     a.push(new Items.landscape.tree(6,8))
     a.push(new Items.landscape.tree(7,9))
     a.push(new Items.landscape.boulder(3,13))
+    a.push(new Items.building.road(3,8))
+    a.push(new Items.building.road(3,9))
     
     a
 )
