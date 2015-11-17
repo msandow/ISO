@@ -59,8 +59,20 @@ module.exports = ->
     bottom_left_corner: "0 0, 1 0, 1 1, .5 1, .2 .9, 0 .7, 0 0"
     top_left_corner: ".5 0, 1 0, 1 1, 0 1, 0 .7, 0 .35, .2 .1"
     top_right_corner: ".5 0, .8 .1, 1 .35, 1 1, 0 1, 0 0"
+    
+    road_top_bookend: ".5 .2, .65 .3, .8 .5, .8 1, .2 1, .2 .5, .35 .3"
+    road_bottom_bookend: ".5 .8, .65 .7, .8 .5, .8 0, .2 0, .2 .5, .35 .7"
+    road_vertical: ".2 0, .8 0, .8 .5, .8 1, .2 1, .2 .5"
+    road_cross: ".2 0, .8 0, .8 .2, 1 .2, 1 .8, .8 .8, .8 1, .2 1, .2 .8, 0 .8, 0 .2, .2 .2"
+    road_horizontal: "0 .2, .5 .2, 1 .2, 1 .8, .5 .8, 0 .8"
+    road_right_bookend: ".8 .5, .7 .65, .5 .8, 0 .8, 0 .2, .5 .2, .7 .35"
+    road_left_bookend: ".2 .5, .3 .65, .5 .8, 1 .8, 1 .2, .5 .2, .3 .35"
+    road_bottom_right: ".2 .2, 1 .2, 1 .8, .8 .8, .8 1, .2 1"
+    road_top_right: ".2 0, .8 0, .8 .2, 1 .2, 1 .8, .2 .8"
+    road_bottom_left: "0 .2, .8 .2, .8 1, .2 1, .2 .8, 0 .8"
+    road_top_left: ".2 0, .8 0, .8 .8, 0 .8, 0 .2, .2 .2"
   
-  for own id, path of paths
+  for own id, path of paths when path
     clip = document.createElementNS(svgNS, 'clipPath')
     clip.setAttributeNS(null,"id",id)
     clip.setAttributeNS(null,"clipPathUnits","objectBoundingBox")

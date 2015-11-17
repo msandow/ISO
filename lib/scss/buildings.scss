@@ -45,8 +45,55 @@ body .plane-3d{
     
       @include textureBuilder(transparent, $road_texture);
       width:50px;
-      height:50px;
-      @include clipPath(all_corners);
+      height:50px;      
+      
+      &.road_singular{
+        @include clipPath(all_corners);
+      }
+      
+      &.road_top_bookend{
+        @include clipPath(road_top_bookend);
+      }
+      
+      &.road_bottom_bookend{
+        @include clipPath(road_bottom_bookend);
+      }
+      
+      &.road_vertical{
+        @include clipPath(road_vertical);
+      }
+      
+      &.road_cross{
+        @include clipPath(road_cross);
+      }
+      
+      &.road_horizontal{
+        @include clipPath(road_horizontal);
+      }
+      
+      &.road_right_bookend{
+        @include clipPath(road_right_bookend);
+      }
+      
+      &.road_left_bookend{
+        @include clipPath(road_left_bookend);
+      }
+      
+      &.road_bottom_right{
+        @include clipPath(road_bottom_right);
+      }
+      
+      &.road_top_right{
+        @include clipPath(road_top_right);
+      }
+      
+      &.road_bottom_left{
+        @include clipPath(road_bottom_left);
+      }
+      
+      &.road_top_left{
+        @include clipPath(road_top_left);
+      }
     }
   }
 }

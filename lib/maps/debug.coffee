@@ -22,12 +22,27 @@ module.exports = new global(
     a.push(new Items.building.test(2,2))
     a.push(new Items.building.house(4,2,1))
     a.push(new Items.building.house(6,2,2))
+    
     a.push(new Items.landscape.bush(7,8))
     a.push(new Items.landscape.tree(6,8))
     a.push(new Items.landscape.tree(7,9))
     a.push(new Items.landscape.boulder(3,13))
+    
+    a.push(new Items.building.road(3,7))
     a.push(new Items.building.road(3,8))
+    a.push(new Items.building.road(1,9))
+    a.push(new Items.building.road(2,9))
     a.push(new Items.building.road(3,9))
+    a.push(new Items.building.road(4,9))
+    a.push(new Items.building.road(3,10))
+    a.push(new Items.building.road(10,7))
+    a.push(new Items.building.road(11,7))
+    a.push(new Items.building.road(12,7))
+    a.push(new Items.building.road(12,8))
+    a.push(new Items.building.road(12,9))
+    a.push(new Items.building.road(11,9))
+    a.push(new Items.building.road(10,9))
+    a.push(new Items.building.road(10,8))
     
     a
 )

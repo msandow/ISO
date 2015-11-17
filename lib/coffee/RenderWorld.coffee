@@ -87,9 +87,7 @@ module.exports =
 
   assignRoadAngles: ->
     if MAPFILE.members.road and MAPFILE.members.road.length
-      
-      cache = {}
-      
+
       for r in MAPFILE.members.road
         adj = r.getAdjacentPositions().filter((g)->
           g.data.children.filter((c)-> c.type is 'building-road' ).length
@@ -101,8 +99,7 @@ module.exports =
           bottom: false
           left: false
         
-        for a in adj when cache["#{a.x}-#{a.y}"] is undefined        
-          cache["#{a.x}-#{a.y}"] = true
+        for a in adj
           pos.top = true if a.y is r.y - 1
           pos.right = true if a.x is r.x + 1
           pos.bottom = true if a.y is r.y + 1
