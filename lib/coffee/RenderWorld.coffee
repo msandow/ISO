@@ -134,7 +134,7 @@ module.exports =
     setUpWorldGrid()
     MAPFILE.importMembers()
     @assignRoadAngles()
-    sprinkle()    
+    sprinkle() if MAPFILE.sprinkle
     
     CP = new ControlPanel().spawn().restyle()
     document.body.appendChild(CP.el)

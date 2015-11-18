@@ -5,6 +5,7 @@ Items = require('./../coffee/Items.coffee')
 module.exports = new global(
   mapSize: 20
   debug: true
+  sprinkle: true
   terrain: do ->
     a = Array.apply(null, Array(20*20)).map(->TERRAIN.GRASS)
     a[145] = TERRAIN.WOODS

@@ -13,6 +13,7 @@ module.exports = class
     @clockMultiplier = 1
     @scale = 1
     @imports = []
+    @sprinkle = false
     
     for own k,v of conf
       @[k] = v
