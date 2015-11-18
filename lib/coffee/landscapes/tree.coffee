@@ -1,5 +1,6 @@
 Landscape = require('./../Landscape.coffee')
 Utils = require('./../Utils.coffee')
+Terrain = require('./../../maps/TERRAIN.coffee')
 
 module.exports = class extends Landscape
   constructor: (@x,@y)->
@@ -18,6 +19,6 @@ module.exports = class extends Landscape
       }
       {
         value: 'landscape tree dual'
-        weight: 20
+        weight: if @data.parents.length and @data.parents[0].terrainId is Terrain.WOODS then 20 else 0
       }
     ])

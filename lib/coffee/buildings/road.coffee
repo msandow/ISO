@@ -1,10 +1,10 @@
 Building = require('./../Building.coffee')
 
 module.exports = class extends Building
-  constructor: (@x,@y)->
+  constructor: (@x,@y,level=1)->
     @type = 'building-road'
     super(@x,@y)
-    @data.level = 1
+    @data.level = level
 
 
   classNameGenerator: ()->

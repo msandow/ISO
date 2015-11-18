@@ -71,7 +71,7 @@ module.exports = class
 
 
   addItemToWorld: (item)->
-    item.spawn().restyle()
+    item.spawn()
     @world.el.appendChild(item.el)
     
     startX = item.x
@@ -90,6 +90,8 @@ module.exports = class
         startX++
 
       startY++      
+    
+    item.restyle()
     
     @
 

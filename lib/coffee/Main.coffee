@@ -26,7 +26,6 @@ module.exports = ->
           img.removeEventListener("abort", img.__loader)
           document.body.removeChild(img)
           total--
-          console.log("** #{total} left")
           Done() if not total
       
       for src in files

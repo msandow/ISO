@@ -50,7 +50,7 @@ body {
         &.grass_4,
         &.sub-grass_4 > div,
         &.grass_4 > div:after{
-          @include textureBuilder($grass_brown_color, $rocky_texture_1);
+          @include textureBuilder($grass_brown_color, $leafy_texture_1);
         }
 
         &.woods_1,

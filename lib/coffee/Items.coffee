@@ -8,3 +8,4 @@ module.exports =
     tree: require('./../coffee/landscapes/tree.coffee')
     grass: require('./../coffee/landscapes/grass.coffee')
     boulder: require('./../coffee/landscapes/boulder.coffee')
+    stump: require('./../coffee/landscapes/stump.coffee')

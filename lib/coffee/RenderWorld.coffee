@@ -51,6 +51,7 @@ setUpWorldGrid = ()->
 
 
 sprinkle = ->
+
   weightArr = [
     {
       value: 'grass'
@@ -65,30 +66,55 @@ sprinkle = ->
       weight: 0
     }
     {
+      value: 'stump'
+      weight: 0
+    }
+    {
+      value: 'boulder'
+      weight: 0
+    }
+    {
       value: false
       weight: 0
     }
   ]
 
   for ter, idx in MAPFILE.terrain when !MAPFILE.members.grid[idx].data.children.length
-    
+
     newItem = false
+    
+    if not window.MODERN.matches(MAPFILE.members.grid[idx].el, '.grass_3')
+    
+      if ter is Terrain.GRASS
 
-    if ter is Terrain.GRASS
+        weightArr[0].weight = 15
+        weightArr[1].weight = 7
+        weightArr[2].weight = 0
+        weightArr[3].weight = 1
+        weightArr[4].weight = 0
+        weightArr[5].weight = 50
 
-      weightArr[0].weight = 15
-      weightArr[1].weight = 7
-      weightArr[2].weight = 1
-      weightArr[3].weight = 50
+        newItem = Utils.weightedRandom(weightArr)
 
-      newItem = Utils.weightedRandom(weightArr)
+      else if ter is Terrain.WOODS
 
-    else if ter is Terrain.WOODS
+        weightArr[0].weight = 5
+        weightArr[1].weight = 5
+        weightArr[2].weight = 20
+        weightArr[3].weight = 15
+        weightArr[4].weight = 0
+        weightArr[5].weight = 1
 
-      weightArr[0].weight = 5
-      weightArr[1].weight = 5
-      weightArr[2].weight = 15
-      weightArr[3].weight = 1
+        newItem = Utils.weightedRandom(weightArr)
+    
+    else
+    
+      weightArr[0].weight = 0
+      weightArr[1].weight = 0
+      weightArr[2].weight = 0
+      weightArr[3].weight = 0
+      weightArr[4].weight = 2
+      weightArr[5].weight = 20
 
       newItem = Utils.weightedRandom(weightArr)
 
@@ -129,17 +155,17 @@ module.exports =
           g.data.children.filter((c)-> c.type is 'building-road' ).length
         )
         
-        pos =
-          top: false
-          right: false
-          bottom: false
-          left: false
+        r.data.around = {} if not r.data.around
+        
+        r.data.around.top = false
+        r.data.around.right = false
+        r.data.around.bottom = false
+        r.data.around.left = false
         
         for a in adj
-          pos.top = true if a.y is r.y - 1
-          pos.right = true if a.x is r.x + 1
-          pos.bottom = true if a.y is r.y + 1
-          pos.left = true if a.x is r.x - 1
+          r.data.around.top = true if a.y is r.y - 1
+          r.data.around.right = true if a.x is r.x + 1
+          r.data.around.bottom = true if a.y is r.y + 1
+          r.data.around.left = true if a.x is r.x - 1
         
-        r.data.around = pos
         r.restyle()

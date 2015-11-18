@@ -1,7 +1,9 @@
 $bushPerspective: (226/169);
-$treePerspective: (180/234);
+$treePerspective: (143/255);
+$treeBigPerspective: (182/255);
 $grassPerspective: (194/188);
-$boulderPerspective: (243/191);
+$boulderPerspective: (201/165);
+$stumpPerspective: (118/83);
 
 body .plane-3d{
   .landscape{
@@ -21,6 +23,25 @@ body .plane-3d{
         translateY: 10px,
         translateZ: 35px,
         translateX: -3px
+      ));
+      
+      &.shift{
+        @include spriteTransform((
+          translateY: 2px,
+          translateZ: 21px,
+          translateX: -12px
+        ));
+      }
+    }
+    
+     &.stump{
+      width:25px;
+      height:25px/$stumpPerspective;
+      background-image:url($stump_sprite);
+      @include spriteTransform((
+        translateY: 6px,
+        translateZ: 26px,
+        translateX: -11px
       ));
     }
     
@@ -45,21 +66,22 @@ body .plane-3d{
     }
     
     &.tree{
-      width:33px;
-      height:33px/$treePerspective;
+      width:37px;
+      height:37px/$treePerspective;
       background-image:url($tree_sprite);
       @include spriteTransform((
-        translateY: -14px,
-        translateZ: 23px,
+        translateY: -27px,
+        translateZ: 11px,
         translateX: 3px
       ));
       
       &.tall{
-        width:43px;
-        height:43px/$treePerspective;
+        width:50px;
+        height:50px/$treeBigPerspective;
+        background-image:url($tree_big_sprite);
         @include spriteTransform((
-          translateY: -26px,
-          translateZ: 27px,
+          translateY: -30px,
+          translateZ: 8px,
           translateX: 1px
         ));
       }
@@ -74,9 +96,9 @@ body .plane-3d{
         background-repeat:no-repeat, no-repeat;
         
         @include spriteTransform((
-          translateY: -34px,
-          translateZ: 27px,
-          translateX: 8px
+          translateY: -47px,
+          translateZ: 6px,
+          translateX: 14px
         ));
       }
     }
@@ -86,9 +108,9 @@ body .plane-3d{
       height:62px/$boulderPerspective;
       background-image:url($boulder_sprite);
       @include spriteTransform((
-        translateY: -12px,
-        translateZ: 26px,
-        translateX: -12px
+        translateY: -17px,
+        translateZ: 20px,
+        translateX: -6px
       ));
     }
   }
